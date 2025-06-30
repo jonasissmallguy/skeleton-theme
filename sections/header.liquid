@@ -1,4 +1,4 @@
-<header>
+<header class="main-header">
   <h2 class="header__title">
     {{ shop.name | link_to: routes.root_url }}
   </h2>
@@ -23,40 +23,51 @@
     </a>
   </div>
 </header>
-<header id="header_menu">
-  <a>
-    Jonas
-  </a>
+
+<header class="secondary-header" id="header_menu">
+  <a>Jonas</a>
 </header>
 
-
 {% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color:Tomato;
+  .main-header {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: Tomato;
   }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
+  
+  .secondary-header {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  background-color: SteelBlue;
+  padding: 0 1rem;
   }
+  
+  .main-header a,
+  .secondary-header a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  }
+  
   header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
+  position: absolute;
+  left: 100%;
+  overflow: hidden;
+  max-width: var(--page-margin);
   }
+  
   header svg {
-    width: 2rem;
+  width: 2rem;
   }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
+  
+  .header__menu,
+  .header__icons {
+  display: flex;
+  gap: 1rem;
+}
 {% endstylesheet %}
 
 {% schema %}

@@ -2,6 +2,10 @@
   <h2 class="header__title">
     {{ shop.name | link_to: routes.root_url }}
   </h2>
+  
+  <div class="header__text">
+    <a>GRATIS LEVERING OVER 399.KR * LEVERING 3-5 ARBEJDSDAGE</a>
+  </div>
 
   <div class="header__menu">
     {% for link in section.settings.menu.links %}

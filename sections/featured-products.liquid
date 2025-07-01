@@ -1,0 +1,107 @@
+<section class="featured-products" data-section-id="{{ section.id }}">
+  {% if section.settings.title != blank %}
+    <h2 class="featured-products__title">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  {% if collections[section.settings.collection] %}
+    <div class="product-grid">
+      {% for product in collections[section.settings.collection].products %}
+        <div class="product-card">
+          <a href="{{ product.url }}" class="product-card__image">
+            <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" />
+          </a>
+          <div class="product-card__meta">
+            <span class="product-card__tag">NYHEDER</span>
+            <h3 class="product-card__title">{{ product.title }}</h3>
+            <span class="product-card__price">
+              {% if product.price_varies %}
+                Fra {{ product.price_min | money }}
+              {% else %}
+                {{ product.price | money }}
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Vælg en kollektion i temaeditoren.</p>
+  {% endif %}
+</section>
+{% stylesheet %}
+.featured-products {
+  background: #fff;
+  padding: 3rem 1rem;
+}
+
+.featured-products__title {
+  font-size: 2rem;
+  text-align: center;
+  font-family: serif;
+  margin-bottom: 2rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1504px;
+  margin: 0 auto;
+}
+
+.product-card {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.product-card__image img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.product-card__meta {
+  margin-top: 0.75rem;
+}
+
+.product-card__tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.product-card__title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.25rem;
+}
+
+.product-card__price {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 0.25rem;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Nyheder"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Showcase"
+    }
+  ]
+}
+{% endschema %}

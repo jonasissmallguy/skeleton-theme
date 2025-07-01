@@ -39,12 +39,17 @@
         "second_image": "shopify://shop_images/3-house-27mar17-Anders-Schonnemann_b.webp",
         "second_image_link": ""
       }
+    },
+    "showcase": {
+      "type": "featured-products",
+      "settings": {}
     }
   },
   "order": [
     "top",
     "middle",
     "bottom",
-    "campaign"
+    "campaign",
+    "showcase"
   ]
 }

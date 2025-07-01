@@ -21,8 +21,8 @@
       "type": "promo-banner",
       "settings": {}
     },
-    "main": {
-      "type": "hello-world",
+    "campaign": {
+      "type": "campaign-images",
       "settings": {}
     }
   },
@@ -30,7 +30,7 @@
     "top",
     "middle",
     "bottom",
-    "main"
+    "campaign"
   ]
 }
 

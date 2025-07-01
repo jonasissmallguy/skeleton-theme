@@ -1,19 +1,21 @@
 <section class="mid-header" data-section-type="mid-header" data-section-id="{{ section.id }}">
-  <div class="mid-header__logo">
-    <a href="{{ routes.root_url }}">
-      <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
-    </a>
-  </div>
+  <div class="mid-header__left">
+    <div class="mid-header__logo">
+      <a href="{{ routes.root_url }}">
+        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
+      </a>
+    </div>
 
-  <nav class="mid-header__menu">
-  {% if section.settings.menu %}
-    {% for link in linklists[section.settings.menu].links %}
-      <a href="{{ link.url }}">{{ link.title }}</a>
-    {% endfor %}
-  {% else %}
-    <span style="color: red;">⚠ No menu selected in Theme Editor</span>
-  {% endif %}
-</nav>
+    <nav class="mid-header__menu">
+      {% if section.settings.menu %}
+        {% for link in linklists[section.settings.menu].links %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <span style="color: red;">⚠ No menu selected in Theme Editor</span>
+      {% endif %}
+    </nav>
+  </div>
 </section>
 
 {% stylesheet %}
@@ -28,9 +30,15 @@
   background-color: white;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 2rem;
   box-sizing: border-box;
+  justify-content: flex-start; /* Align content to left */
+}
+
+.mid-header__left {
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* Space between logo and menu */
 }
 
 .mid-header__logo img {
@@ -51,6 +59,7 @@
 .mid-header__menu a:hover {
   text-decoration: underline;
 }
+
 {% endstylesheet %}
 
 

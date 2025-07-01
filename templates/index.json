@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "top": {
@@ -32,6 +41,13 @@
       }
     },
     "showcase": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Nyheder",
+        "collection": "alle-produkter"
+      }
+    },
+    "featured_products_pyBQLq": {
       "type": "featured-products",
       "settings": {
         "title": "Nyheder",
@@ -82,14 +98,55 @@
     "collection_feature": {
       "type": "collection-feature",
       "settings": {
-        "bg_color": "#f7f7f7",
+        "bg_color": "#c3c6d8",
         "heading": "Shop the New Collection",
         "text": "",
         "button_label": "Explore Now",
         "button_url": "",
-        "image": null,
-        "video": null
+        "image": "shopify://shop_images/kt2.webp"
       }
+    },
+    "collection_showcase_PThnTN": {
+      "type": "collection-showcase",
+      "blocks": {
+        "collection_krQKx4": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/LucindaChambers4.webp",
+            "heading": "",
+            "text": "",
+            "button_label": "Shop now"
+          }
+        },
+        "collection_HMNFY7": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/61mGQhL_clL.jpg",
+            "heading": "",
+            "text": "",
+            "button_label": "Shop now"
+          }
+        },
+        "collection_hrPhdg": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/61ydTvWgsxL_4a8c07f8-c643-4eb0-95d0-e083b42f3d8a.webp",
+            "heading": "",
+            "text": "",
+            "button_label": "Shop now"
+          }
+        }
+      },
+      "block_order": [
+        "collection_krQKx4",
+        "collection_HMNFY7",
+        "collection_hrPhdg"
+      ],
+      "name": "Collection Showcase",
+      "settings": {}
     }
   },
   "order": [
@@ -99,6 +156,8 @@
     "campaign",
     "showcase",
     "collections_showcase",
-    "collection_feature"
+    "collection_feature",
+    "collection_showcase_PThnTN",
+    "featured_products_pyBQLq"
   ]
 }

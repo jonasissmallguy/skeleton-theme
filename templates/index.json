@@ -42,7 +42,10 @@
     },
     "showcase": {
       "type": "featured-products",
-      "settings": {}
+      "settings": {
+        "title": "Nyheder",
+        "collection": "alle-produkter"
+      }
     }
   },
   "order": [

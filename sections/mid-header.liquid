@@ -1,0 +1,79 @@
+<section class="mid-header" data-section-type="mid-header" data-section-id="{{ section.id }}">
+  <div class="mid-header__logo">
+    <a href="{{ routes.root_url }}">
+      <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
+    </a>
+  </div>
+
+  <nav class="mid-header__menu">
+  {% if section.settings.menu %}
+    {% for link in linklists[section.settings.menu].links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {% endfor %}
+  {% else %}
+    <span style="color: red;">⚠ No menu selected in Theme Editor</span>
+  {% endif %}
+</nav>
+</section>
+
+{% stylesheet %}
+.mid-header {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 3.5rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.mid-header__logo img {
+  height: 2.5rem;
+}
+
+.mid-header__menu {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.mid-header__menu a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.mid-header__menu a:hover {
+  text-decoration: underline;
+}
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "Main Header Menu",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Select menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Upload logo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header with Logo and Menu"
+    }
+  ]
+}
+{% endschema %}
+

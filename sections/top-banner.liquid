@@ -1,0 +1,45 @@
+<section class="top-banner" data-section-type="top-banner" data-section-id="{{ section.id }}">
+  <div class="top-banner__content">
+    {{ section.settings.text }}
+  </div>
+</section>
+
+
+{% stylesheet %}
+  .top-banner {
+  width: 100vw; 
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #D3CBA3;
+  }
+  
+
+
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Top Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Banner text",
+      "default": "GRATIS LEVERING OVER 399.KR * LEVERING 3-5 ARBEJDSDAGE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Top Banner"
+    }
+  ]
+}
+{% endschema %}

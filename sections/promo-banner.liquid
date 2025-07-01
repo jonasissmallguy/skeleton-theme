@@ -1,0 +1,46 @@
+<section class="promo-banner">
+  <div class="promo-banner__text">
+    {{ section.settings.text }}
+  </div>
+</section>
+
+
+
+{% stylesheet %}
+  .promo-banner__text{
+  width: 100vw; 
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #CCB658;
+  }
+
+{% endstylesheet %}
+
+
+
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Promo Text",
+      "default": "40% PÅ TALLERKNER, OPHÆNG OG ANDRE PRODUKTER"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Banner"
+    }
+  ]
+}
+{% endschema %}

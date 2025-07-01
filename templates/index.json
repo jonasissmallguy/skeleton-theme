@@ -15,6 +15,9 @@
     }
   },
   "order": [
+    "top",
+    "middle",
+    "bottom",
     "main"
   ]
 }

@@ -43,6 +43,11 @@
     "showcase": {
       "type": "featured-products",
       "settings": {}
+    },
+    "collections_showcase": {
+      "type": "collection-showcase",
+      "blocks": {},
+      "settings": {}
     }
   },
   "order": [
@@ -50,6 +55,7 @@
     "middle",
     "bottom",
     "campaign",
-    "showcase"
+    "showcase",
+    "collections_showcase"
   ]
 }

@@ -26,33 +26,6 @@
   </div>
 </section>
 
-<section class="collection-showcase" data-section-id="{{ section.id }}">
-  <div class="collection-showcase__grid">
-    {% for block in section.blocks %}
-      {% assign collection = collections[block.settings.collection] %}
-      {% if collection %}
-        <div class="collection-card">
-          <a href="{{ collection.url }}">
-            <img
-              src="{{ block.settings.image | image_url: width: 630 }}"
-              alt="{{ collection.title }}"
-              class="collection-card__image"
-            />
-          </a>
-          <div class="collection-card__text">
-            <h3>{{ block.settings.heading | default: collection.title }}</h3>
-            {% if block.settings.text %}
-              <p>{{ block.settings.text }}</p>
-            {% endif %}
-            <a href="{{ collection.url }}" class="collection-card__button">
-              {{ block.settings.button_label }}
-            </a>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-</section>
 
 {% schema %}
 {

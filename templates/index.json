@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "top": {
+      "type": "top-banner",
+      "settings": {}
+    },
+    "middle": {
+      "type": "mid-header",
+      "settings": {}
+    },
+    "bottom": {
+      "type": "promo-banner",
+      "settings": {}
+    },
     "main": {
       "type": "hello-world",
       "settings": {}
@@ -21,3 +33,4 @@
     "main"
   ]
 }
+

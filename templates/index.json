@@ -47,6 +47,13 @@
         "collection": "alle-produkter"
       }
     },
+    "featured_products_pyBQLq": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Nyheder",
+        "collection": "alle-produkter"
+      }
+    },
     "collections_showcase": {
       "type": "collection-showcase",
       "blocks": {
@@ -150,6 +157,7 @@
     "showcase",
     "collections_showcase",
     "collection_feature",
-    "collection_showcase_PThnTN"
+    "collection_showcase_PThnTN",
+    "featured_products_pyBQLq"
   ]
 }

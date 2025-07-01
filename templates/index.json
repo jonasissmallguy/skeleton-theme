@@ -31,7 +31,7 @@
       "type": "campaign-images",
       "settings": {
         "heading": "",
-        "bg_color": "#bcaf3d",
+        "bg_color": "#ffffff",
         "text_color": "#000000",
         "font_size": "2rem",
         "first_image": "shopify://shop_images/arranging-plates-on-wall-720x973.png",
@@ -42,7 +42,10 @@
     },
     "showcase": {
       "type": "featured-products",
-      "settings": {}
+      "settings": {
+        "title": "Nyheder",
+        "collection": "alle-produkter"
+      }
     },
     "collections_showcase": {
       "type": "collection-showcase",

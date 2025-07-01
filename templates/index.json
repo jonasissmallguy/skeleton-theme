@@ -31,7 +31,7 @@
       "type": "campaign-images",
       "settings": {
         "heading": "",
-        "bg_color": "#ffffff",
+        "bg_color": "#bcaf3d",
         "text_color": "#000000",
         "font_size": "2rem",
         "first_image": "shopify://shop_images/arranging-plates-on-wall-720x973.png",

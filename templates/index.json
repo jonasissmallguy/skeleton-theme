@@ -49,7 +49,43 @@
     },
     "collections_showcase": {
       "type": "collection-showcase",
-      "blocks": {},
+      "blocks": {
+        "collection_T99FHJ": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/f1c78f5a01c7c6670f2c9862538c16ee.jpg",
+            "heading": "Mest Populære Pakker",
+            "text": "",
+            "button_label": "Køb Bestsellere"
+          }
+        },
+        "collection_KkhkYx": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/GregIrvine_19-600x800-design-sponge-original-the-design-files-decorating-with-plates.jpg",
+            "heading": "",
+            "text": "",
+            "button_label": "Shop now"
+          }
+        },
+        "collection_g3fktL": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/OrientalBloomWallplates_4.webp",
+            "heading": "",
+            "text": "",
+            "button_label": "Shop now"
+          }
+        }
+      },
+      "block_order": [
+        "collection_T99FHJ",
+        "collection_KkhkYx",
+        "collection_g3fktL"
+      ],
       "settings": {}
     }
   },

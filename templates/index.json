@@ -71,7 +71,7 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/f1c78f5a01c7c6670f2c9862538c16ee.jpg",
+            "image": "shopify://shop_images/LucindaChambers4.webp",
             "heading": "Mest Populære Pakker",
             "text": "",
             "button_label": "Køb Bestsellere"
@@ -225,7 +225,10 @@
         "overlay_color": "#7daccd",
         "overlay_top": 75,
         "overlay_left": 10,
-        "button_label": "Shop Now"
+        "button_label": "Shop Now",
+        "product_title_color": "#000000",
+        "product_price_color": "#333333",
+        "product_overlay_background": "#fffcee"
       }
     },
     "divider_line_1": {

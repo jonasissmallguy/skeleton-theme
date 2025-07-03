@@ -112,9 +112,9 @@
       "type": "collection-feature",
       "settings": {
         "bg_color": "#c3c6d8",
-        "heading": "Shop the New Collection",
-        "text": "",
-        "button_label": "Explore Now",
+        "heading": "Apartment Corners",
+        "text": "Gør din plakat endnu flottere med vores tilbehør! Her har vi samlet alt det tilbehør, du skal bruge for at gøre dit billede komplet – med alt lige fra passepartouter til forskellige slags ophæng til dine plakater.",
+        "button_label": "UDFORSK MERE",
         "button_url": "",
         "image": "shopify://shop_images/kt2.webp"
       }

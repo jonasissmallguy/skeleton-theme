@@ -9,12 +9,33 @@
  */
 {
   "sections": {
+    "top": {
+      "type": "top-banner",
+      "settings": {
+        "text": "GRATIS LEVERING OVER 399.KR * LEVERING 3-5 ARBEJDSDAGE"
+      }
+    },
+    "middle": {
+      "type": "mid-header",
+      "settings": {
+        "menu": "main-menu-1"
+      }
+    },
+    "bottom": {
+      "type": "promo-banner",
+      "settings": {
+        "text": "40% PÅ TALLERKNER, OPHÆNG OG ANDRE PRODUKTER"
+      }
+    },
     "main": {
       "type": "collection",
       "settings": {}
     }
   },
   "order": [
+    "top",
+    "middle",
+    "bottom",
     "main"
   ]
 }

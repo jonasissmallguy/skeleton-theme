@@ -1,0 +1,146 @@
+{% comment %}
+  Full-width section with a main collection and 4 products
+{% endcomment %}
+
+<section class="full-width-collection-section">
+  <div class="collection-wrapper">
+    
+    <!-- Left Side: Main Collection -->
+    <div class="collection-main">
+      {% if section.settings.collection != blank %}
+        {% assign collection = collections[section.settings.collection] %}
+        <a href="{{ collection.url }}" class="collection-image-link">
+          <img src="{{ collection.image | img_url: '800x' }}" alt="{{ collection.title }}" class="collection-image">
+        </a>
+        <h2 class="collection-title">{{ collection.title }}</h2>
+        <p class="collection-description">{{ collection.description | truncatewords: 30 }}</p>
+      {% else %}
+        <p>Please select a collection in the section settings.</p>
+      {% endif %}
+    </div>
+
+    <!-- Right Side: 4 Products from Collection -->
+    <div class="collection-products">
+      {% if collection.products.size > 0 %}
+        {% for product in collection.products limit: 4 %}
+          <div class="product-card">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}" class="product-image">
+              <h3 class="product-title">{{ product.title }}</h3>
+              <span class="product-price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="price-sale">{{ product.price | money }}</span>
+                  <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                {% else %}
+                  <span class="price-regular">{{ product.price | money }}</span>
+                {% endif %}
+              </span>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No products found in this collection.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+.full-width-collection-section {
+  width: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.collection-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.collection-main {
+  flex: 1;
+  min-width: 40%;
+}
+
+.collection-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.collection-title {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.collection-description {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.collection-products {
+  flex: 1;
+  min-width: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.product-title {
+  font-size: 1rem;
+  margin: 10px 0 5px;
+}
+
+.product-price {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.price-sale {
+  color: red;
+  font-weight: bold;
+}
+
+.price-compare {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 5px;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Full Width Collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Main Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full Width Collection Section"
+    }
+  ]
+}
+{% endschema %}

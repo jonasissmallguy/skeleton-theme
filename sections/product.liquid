@@ -1,52 +1,190 @@
-{% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
-{% endcomment %}
-
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
-
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
-
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
+<div class="product-wrapper">
+  <div class="product-view">
+    <!-- Thumbnails -->
+    <div class="product-thumbnails">
+      {% for image in product.images %}
+        <button class="thumbnail {% if forloop.first %}is-active{% endif %}" data-index="{{ forloop.index0 }}">
+          <img src="{{ image | image_url: width: 300 }}" alt="{{ image.alt | escape }}" loading="lazy" />
+        </button>
       {% endfor %}
-    </select>
+    </div>
 
-    <input type="text" name="quantity" min="1" value="1">
+    <!-- Main Image -->
+    <div class="product-media">
+      <a class="product-backlink" href="/collections/{{ product.collections.first.handle }}">← Tilbage til kollektionen</a>
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
+      <div class="product-main-image">
+        {% for image in product.images %}
+          <div class="product-slide {% if forloop.first %}is-visible{% endif %}" data-index="{{ forloop.index0 }}">
+            <img src="{{ image | image_url: width: 1000 }}" alt="{{ image.alt | escape }}" />
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <h1 class="product-title">{{ product.title }}</h1>
+
+      <p class="product-price">
+        {% if product.price_varies %}
+          Fra {{ product.price_min | money }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}
+      </p>
+
+      <div class="product-description">
+        {{ product.description | strip_html }}
+      </div>
+
+      {% form 'product', product %}
+        <label for="variant-select">Variant:</label>
+        <select name="id" id="variant-select">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+              {{ variant.title }} – {{ variant.price | money }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <label for="quantity">Antal:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" />
+
+        <button type="submit" class="add-to-cart-button">Læg i kurv</button>
+        {{ form | payment_button }}
+      {% endform %}
+
+      <div class="product-extras">
+        <p>✔ Gratis fragt over 399 kr.</p>
+        <p>✔ 90 dages returret</p>
+        <p>✔ Levering 3–5 hverdage</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-{% schema %}
-{
-  "name": "t:general.product",
-  "settings": [],
-  "disabled_on": {
-    "groups": ["header", "footer"]
+{% stylesheet %}
+
+/* Outer Wrapper (not full width but left aligned) */
+.product-wrapper {
+  background: #FFFCEE;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Main Layout */
+.product-view {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+/* Thumbnails */
+.product-thumbnails {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .product-thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 80px;
+    max-height: 700px;
+    overflow-y: auto;
   }
 }
-{% endschema %}
+
+/* Main Image */
+.product-media {
+  flex: 1 1 50%;
+  max-width: 50%;
+  position: relative;
+}
+.product-backlink {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #555;
+  text-decoration: underline;
+}
+.product-main-image {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  max-height: 600px;
+  overflow: hidden;
+}
+.product-slide {
+  display: none;
+}
+.product-slide.is-visible {
+  display: block;
+}
+.product-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 100%;
+}
+
+/* Info Section */
+.product-info {
+  flex: 1 1 40%;
+  max-width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.product-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.product-price {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.product-description {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.product-info form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.product-info select,
+.product-info input[type="number"] {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  max-width: 300px;
+}
+.add-to-cart-button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.product-extras {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+{% endstylesheet %}

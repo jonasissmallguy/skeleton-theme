@@ -1,56 +1,208 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+<footer role="contentinfo" class="footer-section">
+  <!-- Taglines / Features -->
+  <aside class="footer-taglines" aria-label="USP blocks">
+    <ul>
+      <li>
+        <figure>
+          <img src="{{ 'transport.svg' | asset_url }}" alt="Hurtig levering">
+          <figcaption>HURTIG LEVERING</figcaption>
+          <p>3-5 arbejdsdage</p>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="{{ 'package.svg' | asset_url }}" alt="Gratis fragt">
+          <figcaption>GRATIS FRAGT</figcaption>
+          <p>Fri fragt over 399&nbsp;kr.</p>
+        </figure>
+      </li>
+      <li>
+        <a href="/info/sustainability-dk/">
+          <figure>
+            <img src="{{ 'plant.svg' | asset_url }}" alt="Miljøvenligt">
+            <figcaption>VI ♥ VORES PLANET</figcaption>
+            <p>Læs om vores miljøarbejde</p>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a href="/info/payment/">
+          <figure>
+            <img src="{{ 'debit-cards.svg' | asset_url }}" alt="Sikre betalinger">
+            <figcaption>SIKRE BETALINGER</figcaption>
+            <p>Betal med kort eller Klarna</p>
+          </figure>
+        </a>
+      </li>
+    </ul>
+  </aside>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+  <!-- Main Footer Content -->
+  <div class="footer-content">
+    <!-- Newsletter -->
+    <div class="footer-newsletter">
+      <img src="{{ section.settings.logo | image_url: width: 150 }}" alt="{{ shop.name }}">
+      <p class="footer-newsletter__title">LAD OS VÆRE VENNER</p>
+      <p class="footer-newsletter__desc">Få 30 % rabat ved tilmelding til vores nyhedsbrev!</p>
+      <form method="post" action="/contact#footer-newsletter">
+        <input type="email" placeholder="Skriv din email adresse" name="contact[email]" required>
+        <button type="submit">Tilmeld</button>
+      </form>
+    </div>
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+    <!-- Links -->
+    <div class="footer-links">
+      <ul>
+        {% for link in section.settings.menu.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Payments & Copyright -->
+    <div class="footer-bottom">
+      <div class="footer-payment">
+        {% if section.settings.show_payment_icons %}
+          {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag }}
+          {% endfor %}
+        {% endif %}
+      </div>
+      <p class="footer-copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+      </p>
+    </div>
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
+.footer-section {
+  background: #CCB658;
+  padding: 3rem 1.5rem;
+  font-family: inherit;
+}
+
+.footer-taglines ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  border-bottom: 1px solid #eee;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-taglines figure {
+  text-align: center;
+}
+
+.footer-taglines img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.footer-taglines figcaption {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.footer-taglines p {
+  font-size: 0.75rem;
+  color: #333;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer-newsletter {
+  text-align: center;
+}
+
+.footer-newsletter__title {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.footer-newsletter__desc {
+  font-size: 0.8rem;
+  margin: 0.5rem 0 1rem;
+  color: #444;
+}
+
+.footer-newsletter input[type="email"] {
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #999;
+}
+
+.footer-newsletter button {
+  background: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.footer-links ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-links a {
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: black;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.footer-payment {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-payment svg {
+  width: 30px;
+  height: auto;
+}
+
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Custom Footer",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "Footer menu"
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
+      "label": "Show payment icons",
       "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo"
     }
   ]
 }

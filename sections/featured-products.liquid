@@ -1,52 +1,70 @@
 <section class="featured-products" data-section-id="{{ section.id }}">
-  {% if section.settings.title != blank %}
-    <h2 class="featured-products__title">{{ section.settings.title }}</h2>
-  {% endif %}
+  <div class="featured-products__inner">
+    {% if section.settings.title != blank %}
+      <h2 class="featured-products__title">{{ section.settings.title }}</h2>
+    {% endif %}
 
-  {% if collections[section.settings.collection] %}
-    <div class="product-grid">
-      {% for product in collections[section.settings.collection].products %}
-        <div class="product-card">
-          <a href="{{ product.url }}" class="product-card__image">
-            <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" />
-          </a>
-          <div class="product-card__meta">
-            <span class="product-card__tag">NYHEDER</span>
-            <h3 class="product-card__title">{{ product.title }}</h3>
-            <span class="product-card__price">
-              {% if product.price_varies %}
-                Fra {{ product.price_min | money }}
-              {% else %}
-                {{ product.price | money }}
-              {% endif %}
-            </span>
+    {% if collections[section.settings.collection] %}
+      <div class="product-grid">
+        {% for product in collections[section.settings.collection].products %}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="product-card__image">
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" />
+            </a>
+            <div class="product-card__meta">
+              <span class="product-card__tag">NYHEDER</span>
+              <h3 class="product-card__title">{{ product.title }}</h3>
+              <span class="product-card__price">
+                {% if product.price_varies %}
+                  Fra {{ product.price_min | money }}
+                {% else %}
+                  {{ product.price | money }}
+                {% endif %}
+              </span>
+            </div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <p>Vælg en kollektion i temaeditoren.</p>
-  {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Vælg en kollektion i temaeditoren.</p>
+    {% endif %}
+  </div>
 </section>
+
+
+
 {% stylesheet %}
 .featured-products {
-  background: #fff;
-  padding: 3rem 1rem;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: #FFFCEE;
+  padding: 3rem 0; /* no side padding here */
 }
 
 .featured-products__title {
   font-size: 2rem;
-  text-align: center;
+  text-align: left;
   font-family: serif;
+  font-style: italic;
   margin-bottom: 2rem;
 }
+
+.featured-products__inner {
+  padding-left: 32px;
+  padding-right: 16px; /* optional: a little breathing room */
+  max-width: none; /* override previous max-width if needed */
+}
+
 
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  max-width: 1504px;
-  margin: 0 auto;
+  margin-top: 0;
 }
 
 .product-card {

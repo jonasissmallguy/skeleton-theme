@@ -1,0 +1,58 @@
+<section class="text-columns" data-section-id="{{ section.id }}">
+  <div class="text-columns__wrapper">
+    <!-- LEFT COLUMN -->
+    <div class="text-columns__column">
+      <h2>LOREM IPSUM DOLOR</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti. <a href="#">Vel illum qui dolorem</a> eum fugiat quo voluptas nulla pariatur.</p>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="text-columns__column">
+      <h2>SED UT PERSPICIATIS</h2>
+      <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. <a href="#">Ut enim ad minima veniam</a>, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+      <h2>ET HARUM QUIDEM</h2>
+      <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+    </div>
+  </div>
+</section>
+
+
+{% stylesheet %}
+.text-columns {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: #FFFCEE;
+  padding: 3rem 0;
+}
+
+.text-columns__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+  max-width: 1504px;
+  margin: 0 auto;
+  padding: 0 1rem; /* optional horizontal padding */
+}
+
+.text-columns__column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.text-columns__column h2 {
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.text-columns__column p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+{% endstylesheet %}

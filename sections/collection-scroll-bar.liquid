@@ -1,0 +1,144 @@
+<section class="collection-scroll-bar-section">
+  <div class="collection-scroll-bar-inner">
+    <ul class="collection-scroll-list" role="list">
+      {% for block in section.blocks %}
+        {% assign collection = collections[block.settings.collection] %}
+        <li class="collection-scroll-item">
+          <a href="{{ collection.url }}" class="collection-scroll-link">
+            <p class="collection-title">{{ collection.title }}</p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if section.settings.button_label != blank and section.settings.button_url != blank %}
+      <div class="scroll-bar-button-container">
+        <a href="{{ section.settings.button_url }}" class="scroll-bar-button">{{ section.settings.button_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+/* Full-width background */
+.collection-scroll-bar-section {
+  width: 100%;
+  background-color: #FFFCEE;
+  padding: 3rem 0;
+}
+
+/* Inner centered container */
+.collection-scroll-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Scrollable collection list */
+.collection-scroll-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(20% - 12.8px);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.collection-scroll-list::-webkit-scrollbar {
+  display: none;
+}
+
+.collection-scroll-item {
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-scroll-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 16px;
+  background-color: #f0ebe1;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #000;
+  transition: background 0.2s ease;
+}
+
+.collection-scroll-link:hover {
+  background-color: #e0dbd0;
+}
+
+.scroll-bar-button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.scroll-bar-button {
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-bar-button:hover {
+  background-color: #333;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection Buttons",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View All Collections"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_item",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Horizontal Collection Scroll",
+      "category": "Custom",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

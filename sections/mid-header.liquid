@@ -2,7 +2,7 @@
   <div class="mid-header__left">
     <div class="mid-header__logo">
       <a href="{{ routes.root_url }}">
-        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
+        <img src="{{ settings.logo | image_url: width: 200 }}" alt="Logo">
       </a>
     </div>
 
@@ -19,8 +19,8 @@
 
   <div class="mid-header__right">
     <a href="#search" class="mid-header__icon" aria-label="Search">
-      {% if section.settings.search_icon %}
-        <img src="{{ section.settings.search_icon | image_url: width: 24 }}" alt="Search icon">
+      {% if settings.search_icon %}
+        <img src="{{ settings.search_icon | image_url: width: 24 }}" alt="Search icon">
       {% else %}
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
           <path d="M21 20l-4.35-4.35M10 17a7 7 0 1 1 0-14 7 7 0 0 1 0 14z" stroke="currentColor" stroke-width="2" fill="none" />
@@ -29,8 +29,8 @@
     </a>
 
     <a href="#user" class="mid-header__icon" aria-label="User">
-      {% if section.settings.user_icon %}
-        <img src="{{ section.settings.user_icon | image_url: width: 24 }}" alt="User icon">
+      {% if settings.user_icon %}
+        <img src="{{ settings.user_icon | image_url: width: 24 }}" alt="User icon">
       {% else %}
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
@@ -39,8 +39,8 @@
     </a>
 
     <a href="#cart" class="mid-header__icon" aria-label="Cart">
-      {% if section.settings.cart_icon %}
-        <img src="{{ section.settings.cart_icon | image_url: width: 24 }}" alt="Cart icon">
+      {% if settings.cart_icon %}
+        <img src="{{ settings.cart_icon | image_url: width: 24 }}" alt="Cart icon">
       {% else %}
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
           <path d="M7 4h-2l-3 9v11h20v-11l-3-9h-2l2 6h-14l2-6zm3 2h4v2h-4v-2zm-4 14h2v2h-2v-2zm10 0h2v2h-2v-2z"/>
@@ -126,26 +126,6 @@
       "type": "link_list",
       "id": "menu",
       "label": "Select menu"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Upload logo"
-    },
-    {
-      "type": "image_picker",
-      "id": "search_icon",
-      "label": "Upload search icon"
-    },
-    {
-      "type": "image_picker",
-      "id": "user_icon",
-      "label": "Upload user icon"
-    },
-    {
-      "type": "image_picker",
-      "id": "cart_icon",
-      "label": "Upload cart icon"
     }
   ],
   "presets": [

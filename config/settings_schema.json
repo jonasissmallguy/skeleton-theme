@@ -79,5 +79,31 @@
         "default": 4
       }
     ]
-  }
+  },
+  {
+  "name": "Header Settings",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "search_icon",
+      "label": "Search Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "user_icon",
+      "label": "User Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "cart_icon",
+      "label": "Cart Icon"
+    }
+  ]
+}
+
 ]

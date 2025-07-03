@@ -1,7 +1,3 @@
-{% comment %}
-Full-width breakout: 50% image (left) with text overlay, 50% product grid (right)
-{% endcomment %}
-
 <div class="collection-section-wrapper">
   <section class="full-width-collection-section">
     {% assign collection = collections[section.settings.collection] %}
@@ -52,6 +48,21 @@ Full-width breakout: 50% image (left) with text overlay, 50% product grid (right
             <div class="product-cell">
               <a href="{{ product.url }}">
                 <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title | escape }}">
+                <div class="product-overlay"
+                  style="
+                    background-color: {{ section.settings.product_overlay_background | default: '#FFFCEE' }};
+                    color: {{ section.settings.product_title_color | default: '#000' }};
+                  "
+                >
+                  <span class="product-title">{{ product.title }}</span>
+                  <span class="product-price" style="color: {{ section.settings.product_price_color | default: '#333' }};">
+                    {% if product.price_varies %}
+                      Fra {{ product.price_min | money }}
+                    {% else %}
+                      {{ product.price | money }}
+                    {% endif %}
+                  </span>
+                </div>
               </a>
             </div>
           {% endfor %}
@@ -65,16 +76,6 @@ Full-width breakout: 50% image (left) with text overlay, 50% product grid (right
 </div>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* Break out of Shopify theme wrappers */
 .collection-section-wrapper {
   width: 100vw;
   position: relative;
@@ -84,10 +85,7 @@ html, body {
   margin-right: -50vw;
 }
 
-/* Section layout */
 .full-width-collection-section {
-  margin: 0;
-  padding: 0;
   width: 100vw;
   background-color: #FFFCEE;
   overflow: hidden;
@@ -95,43 +93,36 @@ html, body {
 
 .collection-columns {
   display: flex;
-  flex-wrap: nowrap;
   width: 100vw;
   height: 100vh;
 }
 
-/* LEFT COLUMN: Image */
+/* LEFT SIDE */
 .collection-left {
   width: 50vw;
   height: 100vh;
 }
-
 .image-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
 }
-
 .main-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
-/* Overlay styling */
 .overlay {
   position: absolute;
   max-width: 90%;
   text-align: left;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
-
 .overlay h2,
 .overlay p {
   margin: 0 0 10px;
 }
-
 .overlay-button {
   display: inline-block;
   padding: 10px 20px;
@@ -140,34 +131,61 @@ html, body {
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
-  transition: background-color 0.3s ease;
 }
-
 .overlay-button:hover {
   background-color: #333;
 }
 
-/* RIGHT COLUMN: 2x2 Grid, no spacing */
+/* RIGHT SIDE */
 .collection-right {
   width: 50vw;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 0;
 }
 
 .product-cell {
   width: 100%;
   height: 100%;
+  position: relative;
 }
-
 .product-cell img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
+
+.product-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(255, 252, 238, 0.9);
+  border-radius: 4px;
+  max-width: 90%;
+}
+.product-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  display: block;
+}
+.product-price {
+  font-size: 13px;
+  display: block;
+}
+
+.collection-image-link,
+.collection-image-link:visited,
+.collection-image-link:hover,
+.collection-image-link:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+
 </style>
 
 {% schema %}
@@ -208,12 +226,12 @@ html, body {
       "label": "Subheading Font Size (px)",
       "default": 18
     },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay Text Color",
-      "default": "#ffffff"
-    },
+      {
+    "type": "color",
+    "id": "overlay_color",
+    "label": "Overlay Text Color",
+    "default": "#000000"
+      },
     {
       "type": "range",
       "id": "overlay_top",
@@ -237,6 +255,24 @@ html, body {
       "id": "button_label",
       "label": "Button Label",
       "default": "Shop Now"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "product_price_color",
+      "label": "Product Price Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "product_overlay_background",
+      "label": "Product Overlay Background",
+      "default": "#FFFCEE"
     }
   ],
   "presets": [

@@ -47,69 +47,6 @@
         "collection": "alle-produkter"
       }
     },
-    "text_columns": {
-      "type": "text-columns",
-      "settings": {}
-    },
-    "full_width_collection_section": {
-      "type": "full-width-collection",
-      "settings": {
-        "collection": "alle-produkter"
-      }
-    },  
-    "collection_scroll_bar": {
-  "type": "collection-scroll-bar",
-  "blocks": {
-    "collection_block_1": {
-      "type": "collection_item",
-      "settings": {
-        "collection": "plakater-og-posters"
-      }
-    },
-    "collection_block_2": {
-      "type": "collection_item",
-      "settings": {
-        "collection": "laerred"
-      }
-    },
-    "collection_block_3": {
-      "type": "collection_item",
-      "settings": {
-        "collection": "billedrammer"
-      }
-    },
-    "collection_block_4": {
-      "type": "collection_item",
-      "settings": {
-        "collection": "featured-artists"
-      }
-    },
-    "collection_block_5": {
-      "type": "collection_item",
-      "settings": {
-        "collection": "magazine"
-      }
-    }
-  },
-  "block_order": [
-    "collection_block_1",
-    "collection_block_2",
-    "collection_block_3",
-    "collection_block_4",
-    "collection_block_5"
-  ],
-  "settings": {
-    "button_label": "View All Collections",
-    "button_url": "/collections"
-  }
-},
-    "featured_products_pyBQLq": {
-      "type": "featured-products",
-      "settings": {
-        "title": "Nyheder",
-        "collection": "alle-produkter"
-      }
-    },
     "collections_showcase": {
       "type": "collection-showcase",
       "blocks": {
@@ -210,6 +147,66 @@
         "title": "Nyheder",
         "collection": "alle-produkter"
       }
+    },
+    "collection_scroll_bar": {
+      "type": "collection-scroll-bar",
+      "blocks": {
+        "collection_block_1": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "plakater-og-posters"
+          }
+        },
+        "collection_block_2": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "laerred"
+          }
+        },
+        "collection_block_3": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "billedrammer"
+          }
+        },
+        "collection_block_4": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "featured-artists"
+          }
+        },
+        "collection_block_5": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "magazine"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_1",
+        "collection_block_2",
+        "collection_block_3",
+        "collection_block_4",
+        "collection_block_5"
+      ],
+      "settings": {
+        "button_label": "View All Collections",
+        "button_url": "/collections"
+      }
+    },
+    "full_width_collection_section": {
+      "type": "full-width-collection",
+      "settings": {
+        "collection": "alle-produkter",
+        "custom_image": "shopify://shop_images/61ydTvWgsxL_4a8c07f8-c643-4eb0-95d0-e083b42f3d8a.webp",
+        "overlay_heading": "Our Featured Collection",
+        "overlay_subheading": "Discover handpicked products",
+        "button_label": "Shop Now"
+      }
+    },
+    "text_columns": {
+      "type": "text-columns",
+      "settings": {}
     }
   },
   "order": [
@@ -224,6 +221,6 @@
     "featured_products_pyBQLq",
     "collection_scroll_bar",
     "full_width_collection_section",
-    "text_columns",
+    "text_columns"
   ]
 }

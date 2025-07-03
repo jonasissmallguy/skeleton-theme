@@ -207,7 +207,27 @@
     "text_columns": {
       "type": "text-columns",
       "settings": {}
-    }
+    },
+    "divider_line_1": {
+  "type": "dividing-line",
+  "settings": {
+    "height": 1,
+    "color": "#000000",
+    "max_width": "1200px",
+    "margin_top": 48,
+    "margin_bottom": 48
+  }
+},
+"divider_line_2": {
+  "type": "dividing-line",
+  "settings": {
+    "height": 1,
+    "color": "#000000",
+    "max_width": "1200px",
+    "margin_top": 48,
+    "margin_bottom": 48
+  }
+}
   },
   "order": [
     "top",
@@ -221,6 +241,8 @@
     "featured_products_pyBQLq",
     "collection_scroll_bar",
     "full_width_collection_section",
-    "text_columns"
+    "divider_line_1",
+    "text_columns",
+    "divider_line_2",
   ]
 }

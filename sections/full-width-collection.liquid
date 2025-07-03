@@ -1,116 +1,135 @@
 {% comment %}
-  Full-width section with a main collection, custom image, overlay text, and 4 products
+Full-width breakout: 50% image (left) with text overlay, 50% product grid (right)
 {% endcomment %}
 
-<section class="full-width-collection-section">
-  <div class="collection-wrapper">
-    
-    <!-- Left Side: Custom Image with Overlay -->
-    <div class="collection-main">
-      {% assign collection = collections[section.settings.collection] %}
+<div class="collection-section-wrapper">
+  <section class="full-width-collection-section">
+    {% assign collection = collections[section.settings.collection] %}
 
-      {% if section.settings.custom_image != blank and collection != blank %}
-        <a href="{{ collection.url }}" class="collection-image-link">
-          <div class="collection-image-container">
-            <img src="{{ section.settings.custom_image | image_url: width: 1200 }}" alt="{{ section.settings.overlay_heading | escape }}" class="collection-image">
-            <div class="collection-overlay">
-              {% if section.settings.overlay_heading != blank %}
-                <h2 class="overlay-heading">{{ section.settings.overlay_heading }}</h2>
-              {% endif %}
-              {% if section.settings.overlay_subheading != blank %}
-                <p class="overlay-subheading">{{ section.settings.overlay_subheading }}</p>
-              {% endif %}
-              {% if section.settings.button_label != blank %}
-                <a href="{{ collection.url }}" class="overlay-button">{{ section.settings.button_label }}</a>
-              {% endif %}
-            </div>
-          </div>
-        </a>
-        <h2 class="collection-title">{{ collection.title }}</h2>
-        <p class="collection-description">{{ collection.description | truncatewords: 30 }}</p>
-      {% else %}
-        <p>Please select a collection and upload an image in the section settings.</p>
-      {% endif %}
-    </div>
+    <div class="collection-columns">
 
-    <!-- Right Side: 4 Products from Collection -->
-    <div class="collection-products">
-      {% if collection != blank and collection.products.size > 0 %}
-        {% for product in collection.products limit: 4 %}
-          <div class="product-card">
-            <a href="{{ product.url }}">
-              <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title | escape }}" class="product-image">
-              <h3 class="product-title">{{ product.title }}</h3>
-              <span class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="price-sale">{{ product.price | money }}</span>
-                  <span class="price-compare">{{ product.compare_at_price | money }}</span>
-                {% else %}
-                  <span class="price-regular">{{ product.price | money }}</span>
+      <!-- LEFT SIDE: Fullscreen Image with Overlay -->
+      <div class="collection-left">
+        {% if section.settings.custom_image != blank and collection %}
+          <a href="{{ collection.url }}" class="collection-image-link">
+            <div class="image-wrapper">
+              <img
+                src="{{ section.settings.custom_image | image_url: width: 2000 }}"
+                alt="{{ section.settings.overlay_heading | escape }}"
+                class="main-image"
+              >
+              <div
+                class="overlay"
+                style="
+                  top: {{ section.settings.overlay_top }}%;
+                  left: {{ section.settings.overlay_left }}%;
+                  color: {{ section.settings.overlay_color }};
+                "
+              >
+                {% if section.settings.overlay_heading %}
+                  <h2 style="font-size: {{ section.settings.overlay_heading_size }}px;">
+                    {{ section.settings.overlay_heading }}
+                  </h2>
                 {% endif %}
-              </span>
-            </a>
-          </div>
-        {% endfor %}
-      {% else %}
-        <p>No products found in this collection.</p>
-      {% endif %}
-    </div>
+                {% if section.settings.overlay_subheading %}
+                  <p style="font-size: {{ section.settings.overlay_subheading_size }}px;">
+                    {{ section.settings.overlay_subheading }}
+                  </p>
+                {% endif %}
+                {% if section.settings.button_label %}
+                  <a href="{{ collection.url }}" class="overlay-button">{{ section.settings.button_label }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      </div>
 
-  </div>
-</section>
+      <!-- RIGHT SIDE: 4 Product Tiles -->
+      <div class="collection-right">
+        {% if collection.products.size > 0 %}
+          {% for product in collection.products limit: 4 %}
+            <div class="product-cell">
+              <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title | escape }}">
+              </a>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>No products in this collection.</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </section>
+</div>
 
 <style>
-.full-width-collection-section {
-  width: 100%;
-  padding: 40px 20px;
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
   box-sizing: border-box;
 }
 
-.collection-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.collection-main {
-  flex: 1;
-  min-width: 40%;
-}
-
-.collection-image-container {
+/* Break out of Shopify theme wrappers */
+.collection-section-wrapper {
+  width: 100vw;
   position: relative;
-  border-radius: 12px;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Section layout */
+.full-width-collection-section {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  background-color: #FFFCEE;
   overflow: hidden;
 }
 
-.collection-image {
+.collection-columns {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* LEFT COLUMN: Image */
+.collection-left {
+  width: 50vw;
+  height: 100vh;
+}
+
+.image-wrapper {
+  position: relative;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.collection-overlay {
+/* Overlay styling */
+.overlay {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  color: white;
+  max-width: 90%;
   text-align: left;
-  max-width: 80%;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
-.overlay-heading {
-  font-size: 2rem;
+.overlay h2,
+.overlay p {
   margin: 0 0 10px;
-  font-weight: bold;
-}
-
-.overlay-subheading {
-  font-size: 1rem;
-  margin: 0 0 15px;
 }
 
 .overlay-button {
@@ -121,65 +140,33 @@
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .overlay-button:hover {
   background-color: #333;
 }
 
-.collection-title {
-  font-size: 2rem;
-  margin-top: 20px;
-}
-
-.collection-description {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #666;
-}
-
-.collection-products {
-  flex: 1;
-  min-width: 50%;
+/* RIGHT COLUMN: 2x2 Grid, no spacing */
+.collection-right {
+  width: 50vw;
+  height: 100vh;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0;
 }
 
-.product-card {
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-}
-
-.product-image {
+.product-cell {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 100%;
+}
+
+.product-cell img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-}
-
-.product-title {
-  font-size: 1rem;
-  margin: 10px 0 5px;
-}
-
-.product-price {
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.price-sale {
-  color: red;
-  font-weight: bold;
-}
-
-.price-compare {
-  text-decoration: line-through;
-  color: #999;
-  margin-left: 5px;
+  display: block;
 }
 </style>
 
@@ -204,10 +191,46 @@
       "default": "Our Featured Collection"
     },
     {
+      "type": "number",
+      "id": "overlay_heading_size",
+      "label": "Heading Font Size (px)",
+      "default": 36
+    },
+    {
       "type": "text",
       "id": "overlay_subheading",
       "label": "Overlay Subheading",
       "default": "Discover handpicked products"
+    },
+    {
+      "type": "number",
+      "id": "overlay_subheading_size",
+      "label": "Subheading Font Size (px)",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_top",
+      "label": "Overlay Top Position (%)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "overlay_left",
+      "label": "Overlay Left Position (%)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30
     },
     {
       "type": "text",

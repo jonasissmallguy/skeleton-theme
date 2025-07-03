@@ -8,5 +8,11 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "logo": "shopify://shop_images/logo.9c4c515a.svg",
+    "search_icon": "shopify://shop_images/search.png",
+    "user_icon": "shopify://shop_images/heart.png",
+    "cart_icon": "shopify://shop_images/shopping-cart.png",
+    "content_for_index": []
+  }
 }

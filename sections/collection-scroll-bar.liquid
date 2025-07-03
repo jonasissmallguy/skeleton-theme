@@ -14,7 +14,10 @@
             <a
               href="{{ collection.url }}"
               class="collection-scroll-link"
-              style="background-color: {{ section.settings.button_background_color | default: '#D3CBA3' }};"
+              style="
+                background-color: {{ section.settings.button_background_color | default: '#D3CBA3' }};
+                font-size: {{ section.settings.button_text_size | default: 15 }}px;
+              "
             >
               <p class="collection-title">{{ collection.title }}</p>
             </a>
@@ -43,6 +46,7 @@
   overflow: hidden;
   margin-bottom: 2rem;
 }
+
 .collection-featured-image img {
   width: 100%;
   object-fit: cover;
@@ -88,7 +92,6 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 15px;
   white-space: nowrap;
   border-radius: 4px;
   text-decoration: none;
@@ -132,6 +135,16 @@
       "id": "button_background_color",
       "label": "Button background color",
       "default": "#D3CBA3"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 15
     }
   ],
   "blocks": [

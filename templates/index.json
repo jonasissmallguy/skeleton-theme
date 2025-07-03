@@ -52,9 +52,9 @@
         "text_gap": "1rem",
         "button_size": "medium",
         "button_bg": "#ccb658",
-        "button_color": "#FFFFFF",
+        "button_color": "#ffffff",
         "image_padding": "",
-        "padding_bg_color": "#FFFFFF"
+        "padding_bg_color": "#ffffff"
       }
     },
     "showcase": {
@@ -208,7 +208,9 @@
       ],
       "settings": {
         "button_label": "View All Collections",
-        "button_url": "/collections"
+        "button_url": "/collections",
+        "button_background_color": "#d3cba3",
+        "button_text_size": 15
       }
     },
     "full_width_collection_section": {
@@ -217,12 +219,12 @@
         "collection": "alle-produkter",
         "custom_image": "shopify://shop_images/61ydTvWgsxL_4a8c07f8-c643-4eb0-95d0-e083b42f3d8a.webp",
         "overlay_heading": "Our Featured Collection",
-        "overlay_heading_size": 36,
+        "overlay_heading_size": 45,
         "overlay_subheading": "Discover handpicked products",
         "overlay_subheading_size": 18,
-        "overlay_color": "#ffffff",
-        "overlay_top": 30,
-        "overlay_left": 30,
+        "overlay_color": "#7daccd",
+        "overlay_top": 75,
+        "overlay_left": 10,
         "button_label": "Shop Now"
       }
     },

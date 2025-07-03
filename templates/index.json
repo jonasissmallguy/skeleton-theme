@@ -18,7 +18,8 @@
     "middle": {
       "type": "mid-header",
       "settings": {
-        "menu": "main-menu-1"
+        "menu": "main-menu-1",
+        "logo": "shopify://shop_images/logo.9c4c515a.svg"
       }
     },
     "bottom": {
@@ -200,34 +201,41 @@
         "collection": "alle-produkter",
         "custom_image": "shopify://shop_images/61ydTvWgsxL_4a8c07f8-c643-4eb0-95d0-e083b42f3d8a.webp",
         "overlay_heading": "Our Featured Collection",
+        "overlay_heading_size": 36,
         "overlay_subheading": "Discover handpicked products",
+        "overlay_subheading_size": 18,
+        "overlay_color": "#ffffff",
+        "overlay_top": 30,
+        "overlay_left": 30,
         "button_label": "Shop Now"
+      }
+    },
+    "divider_line_1": {
+      "type": "dividing-line",
+      "settings": {
+        "height": 1,
+        "color": "#000000",
+        "background_color": "#fffcee",
+        "max_width": "1200px",
+        "margin_top": 48,
+        "margin_bottom": 48
       }
     },
     "text_columns": {
       "type": "text-columns",
       "settings": {}
     },
-    "divider_line_1": {
-  "type": "dividing-line",
-  "settings": {
-    "height": 1,
-    "color": "#000000",
-    "max_width": "1200px",
-    "margin_top": 48,
-    "margin_bottom": 48
-  }
-},
-"divider_line_2": {
-  "type": "dividing-line",
-  "settings": {
-    "height": 1,
-    "color": "#000000",
-    "max_width": "1200px",
-    "margin_top": 48,
-    "margin_bottom": 48
-  }
-}
+    "divider_line_2": {
+      "type": "dividing-line",
+      "settings": {
+        "height": 1,
+        "color": "#000000",
+        "background_color": "#fffcee",
+        "max_width": "1200px",
+        "margin_top": 48,
+        "margin_bottom": 48
+      }
+    }
   },
   "order": [
     "top",
@@ -243,6 +251,6 @@
     "full_width_collection_section",
     "divider_line_1",
     "text_columns",
-    "divider_line_2",
+    "divider_line_2"
   ]
 }

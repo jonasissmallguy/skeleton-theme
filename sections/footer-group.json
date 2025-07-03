@@ -15,7 +15,11 @@
       "type": "footer",
       "settings": {
         "menu": "",
-        "show_payment_icons": true
+        "show_payment_icons": true,
+        "icon_1": "shopify://shop_images/transport.9903f816.svg",
+        "icon_2": "shopify://shop_images/package.d6d47a19_3fee06e6-13e0-4a87-9ff4-afb77e9bafd1.svg",
+        "icon_3": "shopify://shop_images/plant.d49647d3.svg",
+        "icon_4": "shopify://shop_images/debit-cards.79e2752b_1.svg"
       }
     }
   },

@@ -168,7 +168,7 @@
         "collection_krQKx4": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "alle-produkter",
             "image": "shopify://shop_images/LucindaChambers4.webp",
             "heading": "",
             "text": "",
@@ -203,6 +203,13 @@
       ],
       "name": "Collection Showcase",
       "settings": {}
+    },
+    "featured_products_pyBQLq": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Nyheder",
+        "collection": "alle-produkter"
+      }
     }
   },
   "order": [

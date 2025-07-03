@@ -16,33 +16,41 @@
       {% endif %}
     </nav>
   </div>
+
+  <div class="mid-header__right">
+    <a href="#search" class="mid-header__icon">🔍</a>
+    <a href="#user" class="mid-header__icon">👤</a>
+    <a href="#cart" class="mid-header__icon">🛒</a>
+  </div>
 </section>
+
 
 {% stylesheet %}
 .mid-header {
   width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  position: fixed;
+  top: 2.5rem; /* match top-banner height */
+  left: 0;
   height: 3.5rem;
   background-color: #FFFCEE;
   display: flex;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 1rem;
   box-sizing: border-box;
-  justify-content: flex-start; /* Align content to left */
+  justify-content: space-between;
+  z-index: 1000;
+  border-bottom: 1px solid #00680a;
+
 }
 
 .mid-header__left {
   display: flex;
   align-items: center;
-  gap: 2rem; /* Space between logo and menu */
+  gap: 2rem;
 }
 
 .mid-header__logo img {
-  height: 2.5rem;
+  height: 1.5rem;
 }
 
 .mid-header__menu {
@@ -59,6 +67,21 @@
   text-decoration: underline;
 }
 
+.mid-header__right {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.mid-header__icon {
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: black;
+}
+
+.mid-header__icon:hover {
+  opacity: 0.7;
+}
 {% endstylesheet %}
 
 

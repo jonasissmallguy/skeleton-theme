@@ -13,6 +13,32 @@
     {{ content_for_header }}
   </head>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const midHeader = document.querySelector('.mid-header');
+    const topBanner = document.querySelector('.top-banner');
+
+    if (!midHeader || !topBanner) return;
+
+    let topBannerHeight = topBanner.offsetHeight;
+
+    window.addEventListener('resize', () => {
+      topBannerHeight = topBanner.offsetHeight;
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+
+      if (scrollY >= topBannerHeight) {
+        midHeader.style.top = '0';
+      } else {
+        midHeader.style.top = `${topBannerHeight - scrollY}px`;
+      }
+    });
+  });
+</script>
+
+
   <body>
 
     {% sections 'header-group-custom' %}

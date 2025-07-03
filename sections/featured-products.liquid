@@ -9,7 +9,9 @@
         {% for product in collections[section.settings.collection].products %}
           <div class="product-card">
             <a href="{{ product.url }}" class="product-card__image">
-              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" />
+              <div class="product-card__image-wrapper">
+                <img src="{{ product.featured_image | image_url: width: 252, height: 352, crop: 'center' }}" alt="{{ product.title }}" />
+              </div>
             </a>
             <div class="product-card__meta">
               <span class="product-card__tag">NYHEDER</span>
@@ -33,32 +35,33 @@
 
 
 
+
 {% stylesheet %}
 .featured-products {
   width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  background: #FFFCEE;
-  padding: 3rem 0; /* no side padding here */
+  left: 50%;
+  right: 50%;
+  position: relative;
+  background-color: #FFFCEE;
+  padding: calc(3rem + 2rem) 0 3rem 0; /* 6rem header space + 2rem inner top space */
 }
 
+.featured-products__inner {
+  padding-left: 1rem;
+  padding-right: 0;
+  max-width: none;
+}
 .featured-products__title {
   font-size: 2rem;
   text-align: left;
   font-family: serif;
   font-style: italic;
-  margin-bottom: 2rem;
+  margin: 3rem 0 2rem 0;
+  margin-top: 1rem;
+  padding: 0;
 }
-
-.featured-products__inner {
-  padding-left: 32px;
-  padding-right: 16px; /* optional: a little breathing room */
-  max-width: none; /* override previous max-width if needed */
-}
-
 
 .product-grid {
   display: grid;
@@ -72,10 +75,24 @@
   font-family: sans-serif;
 }
 
+.product-card__image-wrapper {
+  background-color: #D3CBA3;
+  aspect-ratio: 251 / 352;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
 .product-card__image img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: auto;
+  vertical-align: middle;
 }
 
 .product-card__meta {
@@ -86,7 +103,6 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   color: #555;
-  
 }
 
 .product-card__title {
@@ -100,6 +116,7 @@
   color: #333;
   margin-top: 0.25rem;
 }
+
 {% endstylesheet %}
 {% schema %}
 {

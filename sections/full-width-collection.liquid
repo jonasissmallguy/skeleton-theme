@@ -1,31 +1,45 @@
 {% comment %}
-  Full-width section with a main collection and 4 products
+  Full-width section with a main collection, custom image, overlay text, and 4 products
 {% endcomment %}
 
 <section class="full-width-collection-section">
   <div class="collection-wrapper">
     
-    <!-- Left Side: Main Collection -->
+    <!-- Left Side: Custom Image with Overlay -->
     <div class="collection-main">
-      {% if section.settings.collection != blank %}
-        {% assign collection = collections[section.settings.collection] %}
+      {% assign collection = collections[section.settings.collection] %}
+
+      {% if section.settings.custom_image != blank and collection != blank %}
         <a href="{{ collection.url }}" class="collection-image-link">
-          <img src="{{ collection.image | img_url: '800x' }}" alt="{{ collection.title }}" class="collection-image">
+          <div class="collection-image-container">
+            <img src="{{ section.settings.custom_image | image_url: width: 1200 }}" alt="{{ section.settings.overlay_heading | escape }}" class="collection-image">
+            <div class="collection-overlay">
+              {% if section.settings.overlay_heading != blank %}
+                <h2 class="overlay-heading">{{ section.settings.overlay_heading }}</h2>
+              {% endif %}
+              {% if section.settings.overlay_subheading != blank %}
+                <p class="overlay-subheading">{{ section.settings.overlay_subheading }}</p>
+              {% endif %}
+              {% if section.settings.button_label != blank %}
+                <a href="{{ collection.url }}" class="overlay-button">{{ section.settings.button_label }}</a>
+              {% endif %}
+            </div>
+          </div>
         </a>
         <h2 class="collection-title">{{ collection.title }}</h2>
         <p class="collection-description">{{ collection.description | truncatewords: 30 }}</p>
       {% else %}
-        <p>Please select a collection in the section settings.</p>
+        <p>Please select a collection and upload an image in the section settings.</p>
       {% endif %}
     </div>
 
     <!-- Right Side: 4 Products from Collection -->
     <div class="collection-products">
-      {% if collection.products.size > 0 %}
+      {% if collection != blank and collection.products.size > 0 %}
         {% for product in collection.products limit: 4 %}
           <div class="product-card">
             <a href="{{ product.url }}">
-              <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}" class="product-image">
+              <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title | escape }}" class="product-image">
               <h3 class="product-title">{{ product.title }}</h3>
               <span class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -42,6 +56,7 @@
         <p>No products found in this collection.</p>
       {% endif %}
     </div>
+
   </div>
 </section>
 
@@ -65,11 +80,52 @@
   min-width: 40%;
 }
 
+.collection-image-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 .collection-image {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  display: block;
   object-fit: cover;
+}
+
+.collection-overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  text-align: left;
+  max-width: 80%;
+}
+
+.overlay-heading {
+  font-size: 2rem;
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+.overlay-subheading {
+  font-size: 1rem;
+  margin: 0 0 15px;
+}
+
+.overlay-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.overlay-button:hover {
+  background-color: #333;
 }
 
 .collection-title {
@@ -135,6 +191,29 @@
       "type": "collection",
       "id": "collection",
       "label": "Main Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image",
+      "label": "Custom Collection Image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_heading",
+      "label": "Overlay Heading",
+      "default": "Our Featured Collection"
+    },
+    {
+      "type": "text",
+      "id": "overlay_subheading",
+      "label": "Overlay Subheading",
+      "default": "Discover handpicked products"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
     }
   ],
   "presets": [

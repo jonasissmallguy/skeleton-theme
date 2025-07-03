@@ -1,4 +1,11 @@
+
 <section class="collection-scroll-bar-section">
+  {% if section.settings.featured_image != blank %}
+    <div class="collection-featured-image">
+      <img src="{{ section.settings.featured_image | image_url: width: 2000 }}" alt="Featured image" loading="lazy">
+    </div>
+  {% endif %}
+
   <div class="collection-scroll-bar-inner">
     <ul class="collection-scroll-list" role="list">
       {% for block in section.blocks %}
@@ -6,28 +13,51 @@
         <li class="collection-scroll-item">
           <a href="{{ collection.url }}" class="collection-scroll-link">
             <p class="collection-title">{{ collection.title }}</p>
+            <span class="collection-description">Shop the latest from this collection</span>
           </a>
         </li>
       {% endfor %}
     </ul>
-
-    {% if section.settings.button_label != blank and section.settings.button_url != blank %}
-      <div class="scroll-bar-button-container">
-        <a href="{{ section.settings.button_url }}" class="scroll-bar-button">{{ section.settings.button_label }}</a>
-      </div>
-    {% endif %}
   </div>
 </section>
 
 {% stylesheet %}
 /* Full-width background */
 .collection-scroll-bar-section {
-  width: 100%;
+  position: relative;
+  width: 100vw; /* viewport width */
+  left: 50%;.collection-scroll-bar-section {
+  position: relative;
+  width: 100vw; /* viewport width */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background-color: #FFFCEE;
   padding: 3rem 0;
+  overflow: hidden;
+}
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: #FFFCEE;
+  padding: 3rem 0;
+  overflow: hidden;
 }
 
-/* Inner centered container */
+/* Featured image full width */
+.collection-featured-image {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.collection-featured-image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Inner container */
 .collection-scroll-bar-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -62,10 +92,11 @@
 
 .collection-scroll-link {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  padding: 0 16px;
+  height: auto;
+  padding: 12px 16px;
   background-color: #f0ebe1;
   text-align: center;
   text-transform: capitalize;
@@ -80,6 +111,12 @@
 
 .collection-scroll-link:hover {
   background-color: #e0dbd0;
+}
+
+.collection-description {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
 }
 
 .scroll-bar-button-container {
@@ -107,6 +144,11 @@
 {
   "name": "Collection Buttons",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured image"
+    },
     {
       "type": "text",
       "id": "button_label",

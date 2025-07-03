@@ -38,7 +38,23 @@
         "first_image": "shopify://shop_images/arranging-plates-on-wall-720x973.png",
         "first_image_link": "",
         "second_image": "shopify://shop_images/3-house-27mar17-Anders-Schonnemann_b.webp",
-        "second_image_link": ""
+        "second_image_link": "",
+        "left_image_title": "UDVALGTE TALLERKENPAKKER",
+        "left_image_text": "INDRET DIT HJEM EFTER TEMA",
+        "left_image_button_text": "Shop Now",
+        "left_image_button_link": "",
+        "text_position": "bottom-left",
+        "text_font": "inherit",
+        "text_size": "1rem",
+        "text_style": "normal",
+        "text_weight": "400",
+        "overlay_text_color": "#ccb658",
+        "text_gap": "1rem",
+        "button_size": "medium",
+        "button_bg": "#ccb658",
+        "button_color": "#000000",
+        "image_padding": "",
+        "padding_bg_color": "#FFFFFF"
       }
     },
     "showcase": {

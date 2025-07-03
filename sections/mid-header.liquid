@@ -2,7 +2,10 @@
   <div class="mid-header__left">
     <div class="mid-header__logo">
       <a href="{{ routes.root_url }}">
-        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
+        <img
+          src="{{ section.settings.logo | image_url: width: section.settings.logo_height | times: 64 | round }}"
+          alt="Logo"
+          style="height: {{ section.settings.logo_height }}rem;">
       </a>
     </div>
 
@@ -26,23 +29,25 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  height: 3.5rem;
+  height: auto;
   background-color: #FFFCEE;
   display: flex;
   align-items: center;
   padding: 0 2rem;
   box-sizing: border-box;
-  justify-content: flex-start; /* Align content to left */
+  justify-content: flex-start;
 }
 
 .mid-header__left {
   display: flex;
   align-items: center;
-  gap: 2rem; /* Space between logo and menu */
+  gap: 2rem;
 }
 
 .mid-header__logo img {
-  height: 2.5rem;
+  display: block;
+  height: auto;
+  max-width: 100%;
 }
 
 .mid-header__menu {
@@ -58,9 +63,7 @@
 .mid-header__menu a:hover {
   text-decoration: underline;
 }
-
 {% endstylesheet %}
-
 
 {% schema %}
 {
@@ -75,6 +78,15 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Upload logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height (rem)",
+      "min": 1,
+      "max": 10,
+      "step": 0.1,
+      "default": 2.5
     }
   ],
   "presets": [
@@ -84,4 +96,3 @@
   ]
 }
 {% endschema %}
-

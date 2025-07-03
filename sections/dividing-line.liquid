@@ -1,11 +1,11 @@
 {% comment %}
-Simple horizontal divider section with customizable background color
+Full-width horizontal divider section with customizable color and no padding
 {% endcomment %}
 
 <div
   class="divider-wrapper"
   style="
-    background-color: {{ section.settings.background_color }};
+    background-color: {{ section.settings.background_color | default: '#FFFCEE' }};
     padding-top: {{ section.settings.margin_top }}px;
     padding-bottom: {{ section.settings.margin_bottom }}px;
   "
@@ -24,8 +24,11 @@ Simple horizontal divider section with customizable background color
 
 <style>
 .divider-wrapper {
-  width: 100%;
-  margin: 0 auto;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .section-divider {
@@ -58,7 +61,7 @@ Simple horizontal divider section with customizable background color
       "type": "color",
       "id": "background_color",
       "label": "Section Background Color",
-      "default": "#ffffff"
+      "default": "#FFFCEE"
     },
     {
       "type": "text",

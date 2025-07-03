@@ -4,6 +4,7 @@
   style="
     background-color: {{ section.settings.bg_color }};
     color: {{ section.settings.text_color }};
+    padding: {{ section.settings.image_padding }};
   "
 >
   {% if section.settings.heading != blank %}
@@ -12,10 +13,35 @@
     </h2>
   {% endif %}
 
-  <div class="campaign-images__container {% if section.settings.second_image %}two-images{% endif %}">
-    <a href="{{ section.settings.first_image_link }}">
-      <img src="{{ section.settings.first_image | image_url: width: 1000 }}" alt="Campaign image 1">
-    </a>
+  <div class="campaign-images__container {% if section.settings.second_image %}two-images{% endif %}" style="background-color: {{ section.settings.padding_bg_color }};">
+    <div class="campaign-image-wrapper">
+      <a href="{{ section.settings.first_image_link }}">
+        <img src="{{ section.settings.first_image | image_url: width: 1000 }}" alt="Campaign image 1">
+      </a>
+      <div class="image-overlay image-position-{{ section.settings.text_position }}" style="
+        font-family: {{ section.settings.text_font }};
+        font-size: {{ section.settings.text_size }};
+        font-style: {{ section.settings.text_style }};
+        font-weight: {{ section.settings.text_weight }};
+        color: {{ section.settings.overlay_text_color }};
+        gap: {{ section.settings.text_gap }};
+      ">
+        {% if section.settings.left_image_title != blank %}
+          <h3>{{ section.settings.left_image_title }}</h3>
+        {% endif %}
+        {% if section.settings.left_image_text != blank %}
+          <p>{{ section.settings.left_image_text }}</p>
+        {% endif %}
+        {% if section.settings.left_image_button_text != blank %}
+          <a href="{{ section.settings.left_image_button_link }}" class="overlay-button button-size-{{ section.settings.button_size }}" style="
+            background-color: {{ section.settings.button_bg }};
+            color: {{ section.settings.button_color }};
+          ">
+            {{ section.settings.left_image_button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
 
     {% if section.settings.second_image %}
       <a href="{{ section.settings.second_image_link }}">
@@ -26,10 +52,10 @@
 </section>
 
 {% stylesheet %}
-/* Constrain the full section */
+/* Layout */
 .campaign-images {
   width: 100vw;
-  height: 752px;
+  height: 752px; /* Fixed height like before */
   position: relative;
   left: 50%;
   right: 50%;
@@ -37,51 +63,79 @@
   margin-right: -50vw;
   overflow: hidden;
   padding: 0;
-  background-color: transparent;
 }
 
-/* Remove spacing from heading if used */
 .campaign-heading {
   text-align: center;
   margin: 0;
   padding: 1rem 0;
 }
 
-/* Container for the images */
+/* Container */
 .campaign-images__container {
   display: flex;
   width: 100%;
-  height: 100%;
   gap: 0;
-  padding: 0;
-  margin: 0;
   flex-wrap: nowrap;
-}
-
-/* Each image link */
-.campaign-images__container a {
-  display: block;
-  width: 100%;
   height: 100%;
 }
 
-/* If there are 2 images, split them evenly */
-.campaign-images__container.two-images a {
+/* Image Containers */
+.campaign-images__container.two-images > .campaign-image-wrapper,
+.campaign-images__container.two-images > a {
   width: 50%;
 }
 
-/* Image style — fill container fully */
 .campaign-images__container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 0;
-  margin: 0;
-  padding: 0;
-  transition: transform 0.3s ease;
 }
 
+/* Image Wrapper */
+.campaign-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Overlay */
+.image-overlay {
+  position: absolute;
+  z-index: 2;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-position-top-left { top: 10%; left: 10%; text-align: left; }
+.image-position-top-right { top: 10%; right: 10%; text-align: right; }
+.image-position-center { top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.image-position-bottom-left { bottom: 10%; left: 10%; text-align: left; }
+.image-position-bottom-right { bottom: 10%; right: 10%; text-align: right; }
+
+/* Text Styles */
+.image-overlay h3 {
+  margin: 0 0 0.5rem 0;
+}
+.image-overlay p {
+  margin: 0 0 1rem 0;
+}
+
+/* Button Styles */
+.overlay-button {
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  display: inline-block;
+  text-align: center;
+  padding: 0.75rem 1.5rem;
+}
+
+.button-size-small { font-size: 0.8rem; padding: 0.5rem 1rem; }
+.button-size-medium { font-size: 1rem; padding: 0.75rem 1.5rem; }
+.button-size-large { font-size: 1.25rem; padding: 1rem 2rem; }
 {% endstylesheet %}
 
 {% schema %}
@@ -103,7 +157,7 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "Section Text Color",
       "default": "#000000"
     },
     {
@@ -136,6 +190,133 @@
       "type": "url",
       "id": "second_image_link",
       "label": "Second Image Link"
+    },
+    {
+      "type": "text",
+      "id": "left_image_title",
+      "label": "Left Image Header",
+      "default": "Welcome to Our Campaign"
+    },
+    {
+      "type": "text",
+      "id": "left_image_text",
+      "label": "Left Image Text",
+      "default": "Discover our exclusive offers just for you."
+    },
+    {
+      "type": "text",
+      "id": "left_image_button_text",
+      "label": "Left Image Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "left_image_button_link",
+      "label": "Left Image Button Link"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text Overlay Position",
+      "default": "top-left",
+      "options": [
+        { "value": "top-left", "label": "Top Left" },
+        { "value": "top-right", "label": "Top Right" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom-left", "label": "Bottom Left" },
+        { "value": "bottom-right", "label": "Bottom Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font",
+      "label": "Text Font Family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme Default" },
+        { "value": "Arial, sans-serif", "label": "Arial" },
+        { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "'Courier New', monospace", "label": "Courier New" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Text Font Size",
+      "default": "1rem",
+      "options": [
+        { "value": "0.875rem", "label": "Small" },
+        { "value": "1rem", "label": "Medium" },
+        { "value": "1.25rem", "label": "Large" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Font Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Font Weight",
+      "default": "400",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "text_gap",
+      "label": "Gap Between Text Elements",
+      "default": "1rem"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button Size",
+      "default": "medium",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "image_padding",
+      "label": "Padding Around Image (e.g. 2rem)",
+      "default": "0"
+    },
+    {
+      "type": "color",
+      "id": "padding_bg_color",
+      "label": "Padding Background Color",
+      "default": "#ffffff"
     }
   ],
   "presets": [

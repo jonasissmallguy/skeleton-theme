@@ -27,6 +27,32 @@
         "text": "40% PÅ TALLERKNER, OPHÆNG OG ANDRE PRODUKTER"
       }
     },
+    "divider_line_1": {
+      "type": "dividing-line",
+      "settings": {
+        "height": 1,
+        "color": "#000000",
+        "background_color": "#fffcee",
+        "max_width": "1200px",
+        "margin_top": 48,
+        "margin_bottom": 48
+      }
+    },
+    "text_columns": {
+      "type": "text-columns",
+      "settings": {}
+    },
+    "divider_line_2": {
+      "type": "dividing-line",
+      "settings": {
+        "height": 1,
+        "color": "#000000",
+        "background_color": "#fffcee",
+        "max_width": "1200px",
+        "margin_top": 48,
+        "margin_bottom": 48
+      }
+    },
     "main": {
       "type": "collection",
       "settings": {}
@@ -36,6 +62,9 @@
     "top",
     "middle",
     "bottom",
-    "main"
+    "main",
+    "divider_line_1",
+    "text_columns",
+    "divider_line_2"
   ]
 }

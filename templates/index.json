@@ -174,31 +174,41 @@
         "collection_block_1": {
           "type": "collection_item",
           "settings": {
-            "collection": "plakater-og-posters"
+            "collection": "plakater-og-posters",
+            "custom_label": "Tallerkner",
+            "custom_url": ""
           }
         },
         "collection_block_2": {
           "type": "collection_item",
           "settings": {
-            "collection": "laerred"
+            "collection": "laerred",
+            "custom_label": "Pakker",
+            "custom_url": ""
           }
         },
         "collection_block_3": {
           "type": "collection_item",
           "settings": {
-            "collection": "billedrammer"
+            "collection": "billedrammer",
+            "custom_label": "Tilbud",
+            "custom_url": ""
           }
         },
         "collection_block_4": {
           "type": "collection_item",
           "settings": {
-            "collection": "featured-artists"
+            "collection": "featured-artists",
+            "custom_label": "Bolig",
+            "custom_url": ""
           }
         },
         "collection_block_5": {
           "type": "collection_item",
           "settings": {
-            "collection": "magazine"
+            "collection": "magazine",
+            "custom_label": "Inspiration",
+            "custom_url": ""
           }
         }
       },

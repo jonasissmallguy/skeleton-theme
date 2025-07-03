@@ -2,38 +2,20 @@
   <!-- Taglines / Features -->
   <aside class="footer-taglines" aria-label="USP blocks">
     <ul>
-      <li>
-        <figure>
-          <img src="{{ 'transport.svg' | asset_url }}" alt="Hurtig levering">
-          <figcaption>HURTIG LEVERING</figcaption>
-          <p>3-5 arbejdsdage</p>
-        </figure>
-      </li>
-      <li>
-        <figure>
-          <img src="{{ 'package.svg' | asset_url }}" alt="Gratis fragt">
-          <figcaption>GRATIS FRAGT</figcaption>
-          <p>Fri fragt over 399&nbsp;kr.</p>
-        </figure>
-      </li>
-      <li>
-        <a href="/info/sustainability-dk/">
+      {% for i in (1..4) %}
+        {% assign icon = 'icon_' | append: i %}
+        <li>
           <figure>
-            <img src="{{ 'plant.svg' | asset_url }}" alt="Miljøvenligt">
-            <figcaption>VI ♥ VORES PLANET</figcaption>
-            <p>Læs om vores miljøarbejde</p>
+            {% if section.settings[icon] != blank %}
+              <img src="{{ section.settings[icon] | image_url: width: 40 }}" alt="Footer icon {{ i }}">
+            {% else %}
+              <img src="{{ 'placeholder.svg' | asset_url }}" alt="Placeholder icon">
+            {% endif %}
+            <figcaption>FEATURE {{ i }}</figcaption>
+            <p>Tilføj tekst i koden</p>
           </figure>
-        </a>
-      </li>
-      <li>
-        <a href="/info/payment/">
-          <figure>
-            <img src="{{ 'debit-cards.svg' | asset_url }}" alt="Sikre betalinger">
-            <figcaption>SIKRE BETALINGER</figcaption>
-            <p>Betal med kort eller Klarna</p>
-          </figure>
-        </a>
-      </li>
+        </li>
+      {% endfor %}
     </ul>
   </aside>
 
@@ -77,6 +59,8 @@
 
 {% stylesheet %}
 .footer-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   background: #D3CBA3;
   padding: 3rem 1.5rem;
   font-family: inherit;
@@ -181,7 +165,6 @@
   width: 30px;
   height: auto;
 }
-
 {% endstylesheet %}
 
 {% schema %}
@@ -203,6 +186,26 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Footer logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon 4"
     }
   ]
 }

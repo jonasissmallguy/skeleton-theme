@@ -10,16 +10,18 @@
       {% for block in section.blocks %}
         {% assign collection = collections[block.settings.collection] %}
         {% if collection %}
+          {% assign label = block.settings.custom_label | default: collection.title %}
+          {% assign link_url = block.settings.custom_url | default: collection.url %}
           <li class="collection-scroll-item">
             <a
-              href="{{ collection.url }}"
+              href="{{ link_url }}"
               class="collection-scroll-link"
               style="
                 background-color: {{ section.settings.button_background_color | default: '#D3CBA3' }};
                 font-size: {{ section.settings.button_text_size | default: 15 }}px;
               "
             >
-              <p class="collection-title">{{ collection.title }}</p>
+              <p class="collection-title">{{ label }}</p>
             </a>
           </li>
         {% endif %}
@@ -156,6 +158,16 @@
           "type": "collection",
           "id": "collection",
           "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "custom_label",
+          "label": "Custom Label (optional)"
+        },
+        {
+          "type": "url",
+          "id": "custom_url",
+          "label": "Custom URL (optional)"
         }
       ]
     }

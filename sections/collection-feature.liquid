@@ -1,8 +1,8 @@
 <section class="collection-feature" style="background-color: {{ section.settings.bg_color }}">
   <div class="collection-feature__wrapper">
     <div class="collection-feature__text">
-      <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.text }}</p>
+      <h2 class="collection-feature__heading">{{ section.settings.heading }}</h2>
+      <p class="collection-feature__description">{{ section.settings.text }}</p>
       <a href="{{ section.settings.button_url }}" class="collection-feature__button">
         {{ section.settings.button_label }}
       </a>
@@ -22,7 +22,6 @@
   </div>
 </section>
 
-
 {% stylesheet %}
 .collection-feature {
   width: 100vw;
@@ -39,7 +38,7 @@
 .collection-feature__wrapper {
   display: flex;
   width: 100%;
-  min-height: 100vh; /* or a specific height if you prefer */
+  min-height: 100vh;
   align-items: stretch;
   box-sizing: border-box;
 }
@@ -58,6 +57,37 @@
   color: black;
 }
 
+.collection-feature__heading {
+  font-size: 4rem; /* Bigger header */
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.collection-feature__description {
+  font-size: 0.95rem; /* Slightly smaller text */
+  margin-bottom: 2.5rem; /* More space below */
+  max-width: 85%;
+  color: #333;
+}
+
+.collection-feature__button {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 1rem 2rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+  border: 1px solid #FFCC00;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  width: fit-content;         
+  max-width: 100%;           
+  white-space: nowrap;        
+}
+
+
 .collection-feature__media {
   position: relative;
   overflow: hidden;
@@ -73,8 +103,8 @@
   object-fit: cover;
   display: block;
 }
-
 {% endstylesheet %}
+
 
 {% schema %}
 {

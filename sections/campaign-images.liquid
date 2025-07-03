@@ -2,41 +2,86 @@
   class="campaign-images"
   data-section-id="{{ section.id }}"
   style="
-    background-color: {{ section.settings.bg_color }};
+    background: {{ section.settings.bg_gradient | default: section.settings.bg_color }};
     color: {{ section.settings.text_color }};
     padding: {{ section.settings.image_padding }};
   "
 >
   {% if section.settings.heading != blank %}
-    <h2 class="campaign-heading" style="font-size: {{ section.settings.font_size }};">
+    <h2
+      class="campaign-heading"
+      style="
+        font-size: {{ section.settings.heading_font_size }};
+        font-weight: {{ section.settings.heading_font_weight }};
+        font-style: {{ section.settings.heading_font_style }};
+        color: {{ section.settings.heading_color }};
+        padding: {{ section.settings.heading_padding }};
+        text-align: {{ section.settings.heading_align }};
+        background: {{ section.settings.heading_gradient }};
+      "
+    >
       {{ section.settings.heading }}
     </h2>
   {% endif %}
 
-  <div class="campaign-images__container {% if section.settings.second_image %}two-images{% endif %}" style="background-color: {{ section.settings.padding_bg_color }};">
+  <div
+    class="campaign-images__container {% if section.settings.second_image %}two-images{% endif %}"
+    style="background: {{ section.settings.padding_bg_gradient | default: section.settings.padding_bg_color }};"
+  >
     <div class="campaign-image-wrapper">
       <a href="{{ section.settings.first_image_link }}">
         <img src="{{ section.settings.first_image | image_url: width: 1000 }}" alt="Campaign image 1">
       </a>
-      <div class="image-overlay image-position-{{ section.settings.text_position }}" style="
-        font-family: {{ section.settings.text_font }};
-        font-size: {{ section.settings.text_size }};
-        font-style: {{ section.settings.text_style }};
-        font-weight: {{ section.settings.text_weight }};
-        color: {{ section.settings.overlay_text_color }};
-        gap: {{ section.settings.text_gap }};
-      ">
+
+      <div
+        class="image-overlay image-position-{{ section.settings.text_position }}"
+        style="
+          font-family: {{ section.settings.text_font }};
+          gap: {{ section.settings.text_gap }};
+        "
+      >
         {% if section.settings.left_image_title != blank %}
-          <h3>{{ section.settings.left_image_title }}</h3>
-        {% endif %}
-        {% if section.settings.left_image_text != blank %}
-          <p>{{ section.settings.left_image_text }}</p>
-        {% endif %}
-        {% if section.settings.left_image_button_text != blank %}
-          <a href="{{ section.settings.left_image_button_link }}" class="overlay-button button-size-{{ section.settings.button_size }}" style="
-            background-color: {{ section.settings.button_bg }};
-            color: {{ section.settings.button_color }};
+          <h3 style="
+            font-size: {{ section.settings.title_font_size }};
+            font-weight: {{ section.settings.title_font_weight }};
+            font-style: {{ section.settings.title_font_style }};
+            color: {{ section.settings.title_color }};
+            padding: {{ section.settings.title_padding }};
+            text-align: {{ section.settings.title_align }};
+            background: {{ section.settings.title_gradient }};
           ">
+            {{ section.settings.left_image_title }}
+          </h3>
+        {% endif %}
+
+        {% if section.settings.left_image_text != blank %}
+          <p style="
+            font-size: {{ section.settings.text_font_size }};
+            font-weight: {{ section.settings.text_font_weight }};
+            font-style: {{ section.settings.text_font_style }};
+            color: {{ section.settings.text_font_color }};
+            padding: {{ section.settings.text_padding }};
+            text-align: {{ section.settings.text_align }};
+            background: {{ section.settings.text_gradient }};
+          ">
+            {{ section.settings.left_image_text }}
+          </p>
+        {% endif %}
+
+        {% if section.settings.left_image_button_text != blank %}
+          <a
+            href="{{ section.settings.left_image_button_link }}"
+            class="overlay-button button-size-{{ section.settings.button_size }}"
+            style="
+              background: {{ section.settings.button_gradient | default: section.settings.button_bg }};
+              color: {{ section.settings.button_color }};
+              padding: {{ section.settings.button_padding }};
+              font-size: {{ section.settings.button_font_size }};
+              font-style: {{ section.settings.button_font_style }};
+              font-weight: {{ section.settings.button_font_weight }};
+              text-align: {{ section.settings.button_align }};
+            "
+          >
             {{ section.settings.left_image_button_text }}
           </a>
         {% endif %}
@@ -50,6 +95,7 @@
     {% endif %}
   </div>
 </section>
+
 
 {% stylesheet %}
 /* Layout */
@@ -156,24 +202,77 @@
       "default": "#ffffff"
     },
     {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Section Background Gradient"
+    },
+    {
       "type": "color",
       "id": "text_color",
       "label": "Section Text Color",
       "default": "#000000"
     },
     {
-    "type": "select",
-    "id": "font_size",
-    "label": "Heading font size",
-    "default": "2rem",
-    "options": [
-      { "value": "1.5rem", "label": "Small" },
-      { "value": "2rem", "label": "Medium" },
-      { "value": "3rem", "label": "Large" },
-      { "value": "3.5rem", "label": "Extra Large (56px)" },
-      { "value": "4rem", "label": "Huge (64px)" }
-    ]
-  },
+      "type": "select",
+      "id": "heading_font_size",
+      "label": "Heading Font Size",
+      "default": "2rem",
+      "options": [
+        { "value": "1.5rem", "label": "Small" },
+        { "value": "2rem", "label": "Medium" },
+        { "value": "3rem", "label": "Large" },
+        { "value": "3.5rem", "label": "Extra Large (56px)" },
+        { "value": "4rem", "label": "Huge (64px)" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading Gradient Background"
+    },
+    {
+      "type": "text",
+      "id": "heading_padding",
+      "label": "Heading Padding (e.g. 2rem)",
+      "default": "1rem 0"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading Font Weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_style",
+      "label": "Heading Font Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
     {
       "type": "image_picker",
       "id": "first_image",
@@ -243,8 +342,73 @@
       ]
     },
     {
+      "type": "text",
+      "id": "text_gap",
+      "label": "Gap Between Text Elements",
+      "default": "1rem"
+    },
+    {
       "type": "select",
-      "id": "text_size",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "default": "1.25rem",
+      "options": [
+        { "value": "1rem", "label": "Small" },
+        { "value": "1.25rem", "label": "Medium" },
+        { "value": "1.5rem", "label": "Large" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color_background",
+      "id": "title_gradient",
+      "label": "Title Gradient Background"
+    },
+    {
+      "type": "text",
+      "id": "title_padding",
+      "label": "Title Padding",
+      "default": "0.5rem 0"
+    },
+    {
+      "type": "select",
+      "id": "title_align",
+      "label": "Title Alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Title Font Weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_font_style",
+      "label": "Title Font Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_size",
       "label": "Text Font Size",
       "default": "1rem",
       "options": [
@@ -254,9 +418,37 @@
       ]
     },
     {
+      "type": "color",
+      "id": "text_font_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color_background",
+      "id": "text_gradient",
+      "label": "Text Gradient Background"
+    },
+    {
+      "type": "text",
+      "id": "text_padding",
+      "label": "Text Padding",
+      "default": "0 0 1rem 0"
+    },
+    {
       "type": "select",
-      "id": "text_style",
-      "label": "Font Style",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_style",
+      "label": "Text Font Style",
       "default": "normal",
       "options": [
         { "value": "normal", "label": "Normal" },
@@ -265,26 +457,14 @@
     },
     {
       "type": "select",
-      "id": "text_weight",
-      "label": "Font Weight",
+      "id": "text_font_weight",
+      "label": "Text Font Weight",
       "default": "400",
       "options": [
         { "value": "300", "label": "Light" },
         { "value": "400", "label": "Normal" },
         { "value": "700", "label": "Bold" }
       ]
-    },
-    {
-      "type": "color",
-      "id": "overlay_text_color",
-      "label": "Overlay Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "text",
-      "id": "text_gap",
-      "label": "Gap Between Text Elements",
-      "default": "1rem"
     },
     {
       "type": "select",
@@ -304,10 +484,63 @@
       "default": "#000000"
     },
     {
+      "type": "color_background",
+      "id": "button_gradient",
+      "label": "Button Background Gradient"
+    },
+    {
       "type": "color",
       "id": "button_color",
       "label": "Button Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "button_padding",
+      "label": "Button Padding (e.g. 1rem 2rem)",
+      "default": "0.75rem 1.5rem"
+    },
+    {
+      "type": "select",
+      "id": "button_font_size",
+      "label": "Button Font Size",
+      "default": "1rem",
+      "options": [
+        { "value": "0.875rem", "label": "Small" },
+        { "value": "1rem", "label": "Medium" },
+        { "value": "1.25rem", "label": "Large" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_font_style",
+      "label": "Button Font Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button Font Weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_align",
+      "label": "Button Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
     },
     {
       "type": "text",
@@ -320,6 +553,11 @@
       "id": "padding_bg_color",
       "label": "Padding Background Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "padding_bg_gradient",
+      "label": "Inner Container Background Gradient"
     }
   ],
   "presets": [

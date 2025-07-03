@@ -16,12 +16,11 @@
             <a
               href="{{ link_url }}"
               class="collection-scroll-link"
-              style="
-                background-color: {{ section.settings.button_background_color | default: '#D3CBA3' }};
-                font-size: {{ section.settings.button_text_size | default: 15 }}px;
-              "
+              style="background-color: {{ section.settings.button_background_color | default: '#D3CBA3' }};"
             >
-              <p class="collection-title">{{ label }}</p>
+              <p class="collection-title" style="font-size: {{ section.settings.button_text_size | default: 15 }}px;">
+                {{ label }}
+              </p>
             </a>
           </li>
         {% endif %}
@@ -111,7 +110,6 @@
   margin: 0;
 }
 {% endstylesheet %}
-
 {% schema %}
 {
   "name": "Collection Buttons",

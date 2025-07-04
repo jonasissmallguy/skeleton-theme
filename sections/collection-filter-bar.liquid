@@ -1,0 +1,76 @@
+{% comment %}
+  Sticky filter bar that shows different filter buttons based on current collection.
+{% endcomment %}
+
+<aside class="collection-filter-bar" data-section-type="collection-filter-bar" data-section-id="{{ section.id }}">
+  <div class="filter-bar__inner">
+    {% if collection.handle == 'tallerkener' %}
+      <button class="filter-button">Farve</button>
+      <button class="filter-button">Materiale</button>
+      <button class="filter-button">Størrelse</button>
+    {% elsif collection.handle == 'vaegkunst' %}
+      <button class="filter-button">Format</button>
+      <button class="filter-button">Tema</button>
+      <button class="filter-button">Kunstner</button>
+    {% elsif collection.handle == 'bestik' %}
+      <button class="filter-button">Farve</button>
+      <button class="filter-button">Antal</button>
+    {% else %}
+      <button class="filter-button">Alle Kategorier</button>
+      <button class="filter-button">Sorter</button>
+    {% endif %}
+  </div>
+</aside>
+
+{% stylesheet %}
+.collection-filter-bar {
+  position: fixed;
+  top: calc(2.5rem + 3.5rem + 3rem); /* header + promo + safe margin */
+  width: 100vw;
+  left: 0;
+  background: #fffcee;
+  z-index: 1029; /* slightly below promo */
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.collection-filter-bar__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.filter-button {
+  background: transparent;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter-button::after {
+  content: url('data:image/svg+xml;utf8,<svg fill="black" height="10" width="10" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 L5 5 L10 0"/></svg>');
+  margin-left: 0.5rem;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection Filter Bar",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Collection Filter Bar"
+    }
+  ]
+}
+{% endschema %}

@@ -14,29 +14,62 @@
   </head>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const midHeader = document.querySelector('.mid-header');
-    const topBanner = document.querySelector('.top-banner');
+document.addEventListener('DOMContentLoaded', function () {
+  const topBanner = document.querySelector('.top-banner');
+  const midHeader = document.querySelector('.mid-header');
+  const promoBanner = document.querySelector('.promo-banner');
+  const filterBar = document.querySelector('.collection-filter-bar');
 
-    if (!midHeader || !topBanner) return;
+  let topHeight = topBanner ? topBanner.offsetHeight : 0;
+  let midHeight = midHeader ? midHeader.offsetHeight : 0;
+  let promoHeight = promoBanner ? promoBanner.offsetHeight : 0;
 
-    let topBannerHeight = topBanner.offsetHeight;
+  function updatePositions() {
+    const scrollY = window.scrollY;
 
-    window.addEventListener('resize', () => {
-      topBannerHeight = topBanner.offsetHeight;
-    });
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-
-      if (scrollY >= topBannerHeight) {
+    if (midHeader) {
+      if (scrollY >= topHeight) {
         midHeader.style.top = '0';
       } else {
-        midHeader.style.top = `${topBannerHeight - scrollY}px`;
+        midHeader.style.top = `${topHeight - scrollY}px`;
       }
-    });
+    }
+
+    if (promoBanner) {
+      if (scrollY >= topHeight) {
+        promoBanner.style.top = `${midHeight}px`;
+      } else {
+        promoBanner.style.top = `${topHeight + midHeight - scrollY}px`;
+      }
+    }
+
+    if (filterBar && promoBanner && midHeader) {
+      if (scrollY >= topHeight + midHeight) {
+        filterBar.style.position = 'fixed';
+        filterBar.style.top = `${midHeight + promoHeight}px`;
+        filterBar.style.width = '100%';
+        filterBar.style.zIndex = '1028';
+      } else {
+        filterBar.style.position = 'fixed';
+        filterBar.style.top = `${topHeight + midHeight + promoHeight - scrollY}px`;
+        filterBar.style.width = '100%';
+        filterBar.style.zIndex = '1028';
+      }
+    }
+  }
+
+  window.addEventListener('scroll', updatePositions);
+  window.addEventListener('resize', () => {
+    topHeight = topBanner ? topBanner.offsetHeight : 0;
+    midHeight = midHeader ? midHeader.offsetHeight : 0;
+    promoHeight = promoBanner ? promoBanner.offsetHeight : 0;
+    updatePositions();
   });
+
+  updatePositions(); // initialize
+});
 </script>
+
 
 
   <body>

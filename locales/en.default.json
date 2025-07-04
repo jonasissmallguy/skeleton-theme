@@ -48,5 +48,11 @@
     "submit": "Search",
     "no_results_html": "No results found for {{ terms }}",
     "results_for_html": "{{ count }} results found for {{ terms }}"
+  },
+  "product_extras": {
+    "free_shipping_text": "Free shipping over 399 DKK",
+    "return_policy_text": "90-day return policy",
+    "delivery_time_text": "Delivery 3-5 business days",
+    "in_stock_text": "In stock"
   }
 }

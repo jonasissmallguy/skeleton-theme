@@ -1,22 +1,23 @@
 <div class="product-wrapper">
   <div class="product-view">
-    <!-- Thumbnails -->
-    <div class="product-thumbnails">
-      {% for image in product.images %}
-        <button class="thumbnail {% if forloop.first %}is-active{% endif %}" data-index="{{ forloop.index0 }}">
-          <img src="{{ image | image_url: width: 300 }}" alt="{{ image.alt | escape }}" loading="lazy" />
-        </button>
-      {% endfor %}
-    </div>
 
-    <!-- Main Image -->
-    <div class="product-media">
-      <a class="product-backlink" href="/collections/{{ product.collections.first.handle }}">← Tilbage til kollektionen</a>
+    <!-- Image Container Box -->
+    <div class="product-images-container">
+        <a class="product-backlink" href="/collections/{{ product.collections.first.handle }}">← Tilbage til kollektionen</a>
+      <!-- Thumbnails -->
+      <div class="product-thumbnails">
+        {% for image in product.images limit: 3 %}
+          <button class="thumbnail {% if forloop.first %}is-active{% endif %}" data-index="{{ forloop.index0 }}">
+            <img src="{{ image | image_url: width: 300 }}" alt="{{ image.alt | escape }}" loading="lazy" />
+          </button>
+        {% endfor %}
+      </div>
 
-      <div class="product-main-image">
+      <!-- Main Image -->
+      <div class="product-media">
         {% for image in product.images %}
           <div class="product-slide {% if forloop.first %}is-visible{% endif %}" data-index="{{ forloop.index0 }}">
-            <img src="{{ image | image_url: width: 1000 }}" alt="{{ image.alt | escape }}" />
+            <img src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | escape }}" loading="eager" />
           </div>
         {% endfor %}
       </div>
@@ -25,7 +26,6 @@
     <!-- Product Info -->
     <div class="product-info">
       <h1 class="product-title">{{ product.title }}</h1>
-
       <p class="product-price">
         {% if product.price_varies %}
           Fra {{ product.price_min | money }}
@@ -34,12 +34,8 @@
         {% endif %}
       </p>
 
-      <div class="product-description">
-        {{ product.description | strip_html }}
-      </div>
-
+      <!-- Add to Cart Form -->
       {% form 'product', product %}
-        <label for="variant-select">Variant:</label>
         <select name="id" id="variant-select">
           {% for variant in product.variants %}
             <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
@@ -47,144 +43,276 @@
             </option>
           {% endfor %}
         </select>
-
-        <label for="quantity">Antal:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" />
-
-        <button type="submit" class="add-to-cart-button">Læg i kurv</button>
-        {{ form | payment_button }}
+          <button type="submit" class="add-to-cart-button">Læg i kurv</button>
       {% endform %}
 
-      <div class="product-extras">
-        <p>✔ Gratis fragt over 399 kr.</p>
-        <p>✔ 90 dages returret</p>
-        <p>✔ Levering 3–5 hverdage</p>
+      <!-- Product Extras with checkmarks -->
+      {% assign check_icon_svg = '
+        <svg aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-check">
+          <path d="M6 10.8L3.2 8l-1.4 1.4L6 13.6l8-8-1.4-1.4L6 10.8z" fill="currentColor"/>
+        </svg>
+      ' %}
+      <div class="product-extras mt-compensate-safe">
+        <div class="check-grid">
+          <div class="check-item">
+            <span class="check-icon">{{ check_icon_svg | raw }}</span>
+            <span>{{ 'product_extras.free_shipping_text' | t }}</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon">{{ check_icon_svg | raw }}</span>
+            <span>{{ 'product_extras.return_policy_text' | t }}</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon">{{ check_icon_svg | raw }}</span>
+            <span>{{ 'product_extras.delivery_time_text' | t }}</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon">{{ check_icon_svg | raw }}</span>
+            <span>{{ 'product_extras.in_stock_text' | t }}</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Product Description -->
+      <div class="product-description">
+        <strong class="block mb-3 text-sm uppercase">Produktbeskrivelse</strong>
+        <div>{{ product.description }}</div>
+      </div>
+
     </div>
+
   </div>
 </div>
 
 {% stylesheet %}
-
-/* Outer Wrapper (not full width but left aligned) */
-.product-wrapper {
-  background: #FFFCEE;
-  width: 100%;
-  padding: 0;
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+  background: #FFFEF5;
+  box-sizing: border-box;
 }
 
-/* Main Layout */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.product-backlink {
+  position: absolute;
+  top: -1.5rem;
+  left: 1.5rem;
+  font-size: 0.9rem;
+  color: #333;
+  text-decoration: underline;
+  z-index: 1;
+  display: block; /* Ensure it's visible */
+  margin: 0; /* Remove any default margins */
+}
+
+.product-wrapper {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  max-width: 100vw;
+  padding: calc(var(--header-height, 160px) - 2rem) 0 0 0;
+  padding-left: 1rem;
+}
+
 .product-view {
+  padding-left: 1rem;
+  display: flex;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 1rem 0 0; /* Added top margin */
+  padding: 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 3rem;
+}
+
+/* New Image Container Box */
+.product-images-container {
   display: flex;
   align-items: flex-start;
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 4rem 0;
+  gap: 8rem; /* Closer spacing */
+  padding: 1.5rem 1rem; /* Less right padding */
+  background: #FFFCEE;
+  flex: 1 1 60%; /* Take more width */
+  max-width: 60%;
+  position: relative;
 }
 
-/* Thumbnails */
 .product-thumbnails {
   display: none;
 }
+
 @media (min-width: 1024px) {
   .product-thumbnails {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 80px;
-    max-height: 700px;
-    overflow-y: auto;
+    width: 160px;
+    flex-shrink: 0;
+  }
+  .product-thumbnails img {
+    width: 160px;
+    height: 230px;
+    object-fit: cover;
+    display: block;
   }
 }
 
-/* Main Image */
 .product-media {
-  flex: 1 1 50%;
-  max-width: 50%;
-  position: relative;
-}
-.product-backlink {
-  display: block;
-  margin-bottom: 1rem;
-  font-size: 0.85rem;
-  color: #555;
-  text-decoration: underline;
-}
-.product-main-image {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 12px;
-  border: 1px solid #eee;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  max-height: 600px;
-  overflow: hidden;
-}
-.product-slide {
-  display: none;
-}
-.product-slide.is-visible {
-  display: block;
-}
-.product-slide img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  max-height: 100%;
-}
-
-/* Info Section */
-.product-info {
-  flex: 1 1 40%;
-  max-width: 40%;
-  display: flex;
-  flex-direction: column;
-}
-.product-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-.product-price {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-.product-description {
-  font-size: 1rem;
-  color: #444;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-.product-info form {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
+
+.product-slide {
+  display: none;
+  padding-right: 2rem; 
+}
+
+.product-slide.is-visible {
+  display: block;
+}
+
+.product-slide img {
+  width: 850px; /* Increased from 750px */
+  height: auto;
+  max-height: 900px; /* Increased proportionally */
+  object-fit: contain;
+}
+
+
+.product-info {
+  flex: 1 1 33%;
+  max-width: 33%;
+  margin-left: -2rem;
+  padding-left: 2rem;
+  padding-top: 2rem; /* Add this line - adjust the value as needed */
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 1rem;
+  
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  padding-bottom: 2rem;
+}
+
+.product-description {
+  padding-top: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.product-description strong {
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.product-info form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .product-info select,
 .product-info input[type="number"] {
-  padding: 0.6rem;
+  padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
+
 .add-to-cart-button {
   background: #000;
   color: #fff;
+  padding: 0.75rem 1rem;
   border: none;
-  padding: 0.75rem 2rem;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  text-transform: uppercase;
+  border-radius: 4px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 500;
 }
-.product-extras {
-  font-size: 0.85rem;
-  color: #777;
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+
+.mt-compensate-safe {
+  margin-top: 1rem;
+}
+
+.check-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.25rem 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  pointer-events: none;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #4a4a4a;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.check-icon {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  color: #27ae60;
+  flex-shrink: 0;
+}
+
+.thumbnail {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.thumbnail img {
+  display: block;
 }
 
 {% endstylesheet %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const thumbnails = document.querySelectorAll('.product-thumbnails .thumbnail');
+    const slides = document.querySelectorAll('.product-slide');
+
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const index = thumb.getAttribute('data-index');
+
+        // Hide all slides
+        slides.forEach(slide => slide.classList.remove('is-visible'));
+        // Show selected slide
+        const selectedSlide = document.querySelector(`.product-slide[data-index="${index}"]`);
+        if (selectedSlide) selectedSlide.classList.add('is-visible');
+
+        // Remove active class from all thumbnails
+        thumbnails.forEach(t => t.classList.remove('is-active'));
+        // Add active class to clicked thumbnail
+        thumb.classList.add('is-active');
+      });
+    });
+  });
+</script>
